@@ -51,8 +51,17 @@ module.exports = {
     }),
     new ForkTsCheckerWebpackPlugin(),
   ],
+  optimization: {
+    splitChunks: {
+      chunks: "all",
+    },
+  },
   devServer: {
-    contentBase: path.join(__dirname, "dist"),
+    static: {
+      directory: path.join(__dirname, "public"),
+    },
     historyApiFallback: true,
+    compress: true,
+    port: 3080,
   },
 };

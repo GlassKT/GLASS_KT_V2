@@ -8,7 +8,7 @@
   "scripts": {
     "start": "webpack-dev-server --mode development --open --hot",
     "build": "webpack --mode production",
-    "production": "serve -s build"
+    "production": "webpack serve --open"
   },
   "dependencies": {
     "react": "^18.2.0",

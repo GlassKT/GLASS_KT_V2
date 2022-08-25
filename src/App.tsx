@@ -1,10 +1,11 @@
-import React from "react";
+import React, { lazy } from "react";
 import { useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Login from "./pages/login/Login";
-import Main from "./pages/Main";
-import Register from "./pages/register";
 import { ReducerInterface } from "./type/interface/redux/reducer";
+
+const Login = lazy(() => import("./pages/login/Login"));
+const Main = lazy(() => import("./pages/Main"));
+const Register = lazy(() => import("./pages/register"));
 
 const App = () => {
   const { login } = useSelector((state: ReducerInterface) => state.userReducer);
