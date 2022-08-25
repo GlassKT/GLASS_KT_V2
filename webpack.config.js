@@ -52,6 +52,7 @@ module.exports = {
     new ForkTsCheckerWebpackPlugin(),
   ],
   devServer: {
+    contentBase: path.join(__dirname, "dist"),
     historyApiFallback: true,
   },
 };
