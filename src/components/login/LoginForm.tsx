@@ -1,4 +1,5 @@
 import React, { useCallback, useRef } from "react";
+import AuthApi from "../../core/api/Auth/Auth.api";
 
 const LoginForm = () => {
   const idRef = useRef<HTMLInputElement>(); // id
@@ -6,7 +7,11 @@ const LoginForm = () => {
 
   const loginRequest = useCallback((e: any) => {
     e.preventDefault(); // 새로고침 막기
-    console.log(idRef.current.value, pwRef.current.value);
+
+    AuthApi.login({
+      id: idRef.current.value,
+      pw: pwRef.current.value,
+    });
   }, []);
 
   return (

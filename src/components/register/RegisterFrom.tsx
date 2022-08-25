@@ -1,4 +1,5 @@
 import React, { useCallback, useRef } from "react";
+import AuthApi from "../../core/api/Auth/Auth.api";
 
 const RegisterFrom = () => {
   const idRef = useRef<HTMLInputElement>(); // id
@@ -15,12 +16,17 @@ const RegisterFrom = () => {
       return;
     }
 
-    console.log(
-      idRef.current.value,
-      pwRef.current.value,
-      nameRef.current.value,
-      emailRef.current.value
-    );
+    AuthApi.register({
+      id: idRef.current.value,
+      pw: pwRef.current.value,
+      name: nameRef.current.value,
+      email: emailRef.current.value,
+    });
+  }, []);
+
+  const changeVisibility = useCallback(() => {
+    const type = pwRef.current.type;
+    pwRef.current.type = type === "password" ? "text" : "password";
   }, []);
 
   const sendEmail = useCallback(() => {
@@ -43,6 +49,7 @@ const RegisterFrom = () => {
       </div>
       <input type="text" ref={idRef} maxLength={30} required />
       <input type="password" ref={pwRef} required />
+      <p onClick={changeVisibility}>눈</p>
       <button type="submit">전송</button>
     </form>
   );
