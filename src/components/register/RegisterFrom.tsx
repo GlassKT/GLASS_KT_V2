@@ -1,5 +1,6 @@
 import React, { useCallback, useRef } from "react";
 import AuthApi from "../../core/api/Auth/Auth.api";
+import RegisterToggle from "./registerToggle";
 
 const RegisterFrom = () => {
   const idRef = useRef<HTMLInputElement>(); // id
@@ -43,9 +44,7 @@ const RegisterFrom = () => {
       <input type="text" ref={nameRef} required />
       <div>
         <input id="email" type="email" ref={emailRef} required />
-        <label htmlFor="email" onClick={sendEmail}>
-          인증
-        </label>
+        <RegisterToggle sendEmail={sendEmail} />
       </div>
       <input type="text" ref={idRef} maxLength={30} required />
       <input type="password" ref={pwRef} required />

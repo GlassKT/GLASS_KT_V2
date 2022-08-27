@@ -12,6 +12,9 @@ class Auth {
       console.log(data);
     }
   }
+  public async logout(data) {
+    return true;
+  }
 }
 
 export default new Auth();
