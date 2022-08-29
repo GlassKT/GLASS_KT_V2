@@ -1,4 +1,6 @@
 import React from "react";
+import Modal from "../common/modal/Modal";
+import Toggle from "../common/toggle/Toggle";
 
 const SelfProfile = () => {
   return (
@@ -6,10 +8,31 @@ const SelfProfile = () => {
       <div className="name"></div>
       <div className="email"></div>
       <div className="hobby"></div>
-      <div className="modify">수정</div>
+      <Toggle>
+        <Toggle.On>
+          <SelfProfile.Modals />
+        </Toggle.On>
+        <Toggle.Trigger>
+          <div className="modify">수정</div>
+        </Toggle.Trigger>
+      </Toggle>
       <div className="logout">로그아웃</div>
     </div>
   );
 };
+
+const Modals = () => {
+  return (
+    <Modal>
+      <Modal.Name />
+      <Modal.Hobby />
+      <Modal.Off>
+        <Toggle.Off>확인</Toggle.Off>
+      </Modal.Off>
+    </Modal>
+  );
+};
+
+SelfProfile.Modals = Modals;
 
 export default SelfProfile;

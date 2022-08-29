@@ -9,12 +9,12 @@ const RegisterToggle = memo(({ sendEmail }: any) => {
           인증
         </label>
       </Toggle.Trigger>
-      <Toggle.On>
+      <Toggle.OnTime>
         <div>
           popup
           <Toggle.Off>popupDelete</Toggle.Off>
         </div>
-      </Toggle.On>
+      </Toggle.OnTime>
     </Toggle>
   );
 });

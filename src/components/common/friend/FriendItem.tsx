@@ -14,13 +14,13 @@ const FriendItem = () => {
         <Toggle>
           <Toggle.On>
             <div>show</div>
+            <Toggle.Off>
+              <div>close</div>
+            </Toggle.Off>
           </Toggle.On>
           <Toggle.Trigger>
             <div>open</div>
           </Toggle.Trigger>
-          <Toggle.Off>
-            <div>close</div>
-          </Toggle.Off>
         </Toggle>
       </div>
     </FriendStyle>

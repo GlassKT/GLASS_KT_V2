@@ -40,6 +40,10 @@ const useToggleContext = (): ToggleContextType => {
 };
 
 const On = ({ children }: { children: React.ReactNode }) => {
+  const { on } = useToggleContext();
+  return on ? <>{children}</> : null;
+};
+const OnTime = ({ children }: { children: React.ReactNode }) => {
   const { on, toggle } = useToggleContext();
 
   useTimeOut(
@@ -66,5 +70,6 @@ const Off = ({ children }: { children: React.ReactNode }) => {
 Toggle.On = On;
 Toggle.Trigger = Trigger;
 Toggle.Off = Off;
+Toggle.OnTime = OnTime;
 
 export default Toggle;
