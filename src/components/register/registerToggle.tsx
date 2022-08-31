@@ -1,4 +1,5 @@
 import React, { memo } from "react";
+import Alert from "../common/alert";
 import Toggle from "../common/toggle/Toggle";
 import { Label } from "./RegisterForm";
 
@@ -15,10 +16,13 @@ const RegisterToggle = memo(({ sendEmail }: RegisterToggleType) => {
         </Label>
       </Toggle.Trigger>
       <Toggle.OnTime>
-        <div>
-          popup
+        <Alert>
+          <Alert.title>이메일 인증</Alert.title>
+          <Alert.description>
+            입력하신 이메일로 전송되었습니다.
+          </Alert.description>
           <Toggle.Off>popupDelete</Toggle.Off>
-        </div>
+        </Alert>
       </Toggle.OnTime>
     </Toggle>
   );
