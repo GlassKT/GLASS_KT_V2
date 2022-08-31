@@ -2,6 +2,16 @@ import styled from "styled-components";
 
 const Register = styled.form`
   width: 400px;
+
+  h1 {
+    font-weight: 500;
+    font-size: 48px;
+    line-height: 65px;
+
+    text-align: center;
+
+    color: #000000;
+  }
 `;
 
 const Input = styled.input`

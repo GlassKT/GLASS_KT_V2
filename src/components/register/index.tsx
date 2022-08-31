@@ -25,6 +25,7 @@ const RegisterFrom = () => {
 
   return (
     <Register onSubmit={registerRequest}>
+      <h1>GLASS KT</h1>
       <InputLabel>
         <Label htmlFor="email">이메일</Label>
         <Flex>
