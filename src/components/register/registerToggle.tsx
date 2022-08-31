@@ -1,7 +1,7 @@
 import React, { memo } from "react";
 import Alert from "../common/alert";
 import Toggle from "../common/toggle/Toggle";
-import { Label } from "./RegisterForm";
+import { Email, Label } from "./RegisterForm";
 
 interface RegisterToggleType {
   sendEmail: () => void;
@@ -12,7 +12,7 @@ const RegisterToggle = memo(({ sendEmail }: RegisterToggleType) => {
     <Toggle>
       <Toggle.Trigger>
         <Label htmlFor="email" onClick={sendEmail}>
-          인증
+          <Email>인증</Email>
         </Label>
       </Toggle.Trigger>
       <Toggle.OnTime>
