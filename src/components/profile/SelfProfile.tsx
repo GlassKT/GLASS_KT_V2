@@ -1,5 +1,5 @@
 import React from "react";
-import Modal from "../common/modal/Modal";
+import Modal from "../modal";
 import Toggle from "../common/toggle/Toggle";
 
 const SelfProfile = () => {
@@ -26,9 +26,9 @@ const Modals = () => {
     <Modal>
       <Modal.Name />
       <Modal.Hobby />
-      <Modal.Off>
+      <Modal.Request>
         <Toggle.Off>확인</Toggle.Off>
-      </Modal.Off>
+      </Modal.Request>
     </Modal>
   );
 };
