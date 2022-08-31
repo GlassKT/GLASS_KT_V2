@@ -1,8 +1,13 @@
 import React, { createContext, memo, useContext, useMemo } from "react";
 import Alert from "../common/alert";
 import Toggle from "../common/toggle/Toggle";
-import { Image, Name, Tags, Tag, Refuse, Accept } from "./Friend";
+import { Image, Name, Tags, Tag, Button } from "./Friend";
 import useFriend from "./hooks/useFriend";
+
+interface ButtonProps {
+  children: React.ReactNode;
+  func: () => void;
+}
 
 interface FriendProps {
   children: React.ReactNode;
@@ -163,3 +168,15 @@ Friend.FriendList = FriendList;
 Friend.FriendBlock = FriendBlock;
 
 export default Friend;
+
+const Refuse = ({ children, func }: ButtonProps) => (
+  <Button color="black" onClick={func}>
+    {children}
+  </Button>
+);
+
+const Accept = ({ children, func }: ButtonProps) => (
+  <Button color="blue" onClick={func}>
+    {children}
+  </Button>
+);
