@@ -1,5 +1,5 @@
 import React from "react";
-import { AlertContainer, Description, Title } from "./Alert";
+import { AlertContainer, Button, Description, Title } from "./Alert";
 
 interface AlertProps {
   children: React.ReactNode;
@@ -16,7 +16,7 @@ const description = ({ children }: AlertProps) => {
   return <Description>{children}</Description>;
 };
 const Off = ({ children }: AlertProps) => {
-  return <button>{children}</button>;
+  return <Button>{children}</Button>;
 };
 
 Alert.title = title;

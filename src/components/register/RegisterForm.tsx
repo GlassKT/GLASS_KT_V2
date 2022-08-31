@@ -74,7 +74,9 @@ const Flex = styled.div`
   flex: 1;
   width: 100%;
 
-  position: relative;
+  &[id="relative"] {
+    position: relative;
+  }
 `;
 
 const Email = styled.div`

@@ -42,7 +42,7 @@ const RegisterFrom = () => {
       </InputLabel>
       <InputLabel>
         <Label htmlFor="pw">비밀번호</Label>
-        <Flex>
+        <Flex id="relative">
           <Input type="password" id="pw" ref={pwRef} required />
           <Show>
             <ShowToggle onClick={changeVisibility}>눈</ShowToggle>
