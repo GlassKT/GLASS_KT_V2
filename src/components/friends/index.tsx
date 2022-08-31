@@ -1,27 +1,54 @@
-import React, { memo } from "react";
+import React, { createContext, memo, useContext, useMemo } from "react";
 import Alert from "../common/alert";
 import Toggle from "../common/toggle/Toggle";
+import { Image, Name, Tags, Tag } from "./Friend";
 
 interface FriendProps {
   children: React.ReactNode;
 }
 
-const Friend = ({ children }: FriendProps) => {
+interface FriendType {
+  name: string;
+  tags: string[];
+}
+
+interface FriendItemProps extends FriendProps {
+  item: FriendType;
+}
+
+const FriendContext = createContext<FriendType>({
+  name: null,
+  tags: [],
+});
+
+const FriendContainer = memo(({ item, children }: FriendItemProps) => {
+  const value: any = {
+    name: item.name,
+    tags: item.tags,
+  };
+
   return (
-    <div>
-      <img src="" alt="" />
-      <div className="name">박성한</div>
-      <div className="tags">
-        <div className="tag">#볼링</div>
-        <div className="tag">#축구</div>
-        <div className="tag">#코딩</div>
-      </div>
+    <FriendContext.Provider value={value}>{children}</FriendContext.Provider>
+  );
+});
+
+const Friend = ({ item, children }: FriendItemProps) => {
+  return (
+    <Friend.FriendContainer item={item}>
+      <Image src="" alt="" />
+      <Name>{item.name}</Name>
+      <Tags className="tags">
+        {item.tags.map((v) => (
+          <Tag className="tag">{v}</Tag>
+        ))}
+      </Tags>
       {children}
-    </div>
+    </Friend.FriendContainer>
   );
 };
 
 const FriendRequest = memo(() => {
+  const { name } = useContext(FriendContext);
   return (
     <>
       <Toggle>
@@ -29,7 +56,7 @@ const FriendRequest = memo(() => {
           <Alert>
             <Alert.title>거절</Alert.title>
             <Alert.description>
-              OO님의 친구요청이 거절되었습니다.
+              {name}님의 친구요청이 거절되었습니다.
             </Alert.description>
             <Toggle.Off>
               <Alert.Off>확인</Alert.Off>
@@ -42,7 +69,7 @@ const FriendRequest = memo(() => {
         <Toggle.OnTime>
           <Alert.title>수락</Alert.title>
           <Alert.description>
-            OO님의 친구요청이 수락되었습니다.
+            {name}님의 친구요청이 수락되었습니다.
           </Alert.description>
           <Toggle.Off>
             <Alert.Off>확인</Alert.Off>
@@ -55,6 +82,7 @@ const FriendRequest = memo(() => {
 });
 
 const FriendList = memo(() => {
+  const { name } = useContext(FriendContext);
   return (
     <>
       <Toggle>
@@ -62,7 +90,7 @@ const FriendList = memo(() => {
           <Alert>
             <Alert.title>삭제</Alert.title>
             <Alert.description>
-              OO님이 친구목록에서 삭제되었습니다.
+              {name}님이 친구목록에서 삭제되었습니다.
             </Alert.description>
             <Toggle.Off>
               <Alert.Off>확인</Alert.Off>
@@ -77,6 +105,7 @@ const FriendList = memo(() => {
 });
 
 const FriendBlock = memo(() => {
+  const { name } = useContext(FriendContext);
   return (
     <>
       <Toggle>
@@ -84,7 +113,7 @@ const FriendBlock = memo(() => {
           <Alert>
             <Alert.title>차단 해제</Alert.title>
             <Alert.description>
-              OO님이 차단 목록에서 삭제되었습니다.
+              {name}님이 차단 목록에서 삭제되었습니다.
             </Alert.description>
             <Toggle.Off>
               <Alert.Off>확인</Alert.Off>
@@ -97,6 +126,7 @@ const FriendBlock = memo(() => {
   );
 });
 
+Friend.FriendContainer = FriendContainer;
 Friend.FriendRequest = FriendRequest;
 Friend.FriendList = FriendList;
 Friend.FriendBlock = FriendBlock;
