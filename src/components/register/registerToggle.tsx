@@ -1,13 +1,18 @@
 import React, { memo } from "react";
 import Toggle from "../common/toggle/Toggle";
+import { Label } from "./RegisterForm";
 
-const RegisterToggle = memo(({ sendEmail }: any) => {
+interface RegisterToggleType {
+  sendEmail: () => void;
+}
+
+const RegisterToggle = memo(({ sendEmail }: RegisterToggleType) => {
   return (
     <Toggle>
       <Toggle.Trigger>
-        <label htmlFor="email" onClick={sendEmail}>
+        <Label htmlFor="email" onClick={sendEmail}>
           인증
-        </label>
+        </Label>
       </Toggle.Trigger>
       <Toggle.OnTime>
         <div>
