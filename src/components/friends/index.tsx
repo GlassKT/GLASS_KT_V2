@@ -1,31 +1,51 @@
 import React, { createContext, memo, useContext, useMemo } from "react";
 import Alert from "../common/alert";
 import Toggle from "../common/toggle/Toggle";
-import { Image, Name, Tags, Tag } from "./Friend";
+import { Image, Name, Tags, Tag, Refuse, Accept } from "./Friend";
+import useFriend from "./hooks/useFriend";
 
 interface FriendProps {
   children: React.ReactNode;
 }
 
 interface FriendType {
+  id: number;
   name: string;
   tags: string[];
+}
+
+interface FriendFuncType {
+  func: {
+    accept: () => void;
+    remove: () => void;
+    refuse: () => void;
+    chat: () => void;
+    block: () => void;
+  };
 }
 
 interface FriendItemProps extends FriendProps {
   item: FriendType;
 }
 
-const FriendContext = createContext<FriendType>({
+const FriendContext = createContext<FriendType & FriendFuncType>({
+  id: null,
   name: null,
   tags: [],
+  func: null,
 });
 
 const FriendContainer = memo(({ item, children }: FriendItemProps) => {
-  const value: any = {
-    name: item.name,
-    tags: item.tags,
-  };
+  const func = useFriend(item.id);
+  const value: any = useMemo(
+    () => ({
+      id: item.id,
+      name: item.name,
+      tags: item.tags,
+      func: func,
+    }),
+    [item, func]
+  );
 
   return (
     <FriendContext.Provider value={value}>{children}</FriendContext.Provider>
@@ -39,7 +59,9 @@ const Friend = ({ item, children }: FriendItemProps) => {
       <Name>{item.name}</Name>
       <Tags className="tags">
         {item.tags.map((v) => (
-          <Tag className="tag">{v}</Tag>
+          <Tag className="tag" key={v}>
+            {v}
+          </Tag>
         ))}
       </Tags>
       {children}
@@ -48,7 +70,8 @@ const Friend = ({ item, children }: FriendItemProps) => {
 };
 
 const FriendRequest = memo(() => {
-  const { name } = useContext(FriendContext);
+  const { func, name } = useContext(FriendContext);
+
   return (
     <>
       <Toggle>
@@ -63,7 +86,9 @@ const FriendRequest = memo(() => {
             </Toggle.Off>
           </Alert>
         </Toggle.OnTime>
-        <Toggle.Trigger>거절</Toggle.Trigger>
+        <Toggle.Trigger>
+          <Refuse func={func.refuse}>거절</Refuse>
+        </Toggle.Trigger>
       </Toggle>
       <Toggle>
         <Toggle.OnTime>
@@ -75,14 +100,16 @@ const FriendRequest = memo(() => {
             <Alert.Off>확인</Alert.Off>
           </Toggle.Off>
         </Toggle.OnTime>
-        <Toggle.Trigger>수락</Toggle.Trigger>
+        <Toggle.Trigger>
+          <Accept func={func.accept}>수락</Accept>
+        </Toggle.Trigger>
       </Toggle>
     </>
   );
 });
 
 const FriendList = memo(() => {
-  const { name } = useContext(FriendContext);
+  const { func, name } = useContext(FriendContext);
   return (
     <>
       <Toggle>
@@ -97,15 +124,17 @@ const FriendList = memo(() => {
             </Toggle.Off>
           </Alert>
         </Toggle.OnTime>
-        <Toggle.Trigger>삭제</Toggle.Trigger>
+        <Toggle.Trigger>
+          <Refuse func={func.remove}>삭제</Refuse>
+        </Toggle.Trigger>
       </Toggle>
-      <button>1:1 채팅</button>
+      <Accept func={func.chat}>1:1 채팅</Accept>
     </>
   );
 });
 
 const FriendBlock = memo(() => {
-  const { name } = useContext(FriendContext);
+  const { func, name } = useContext(FriendContext);
   return (
     <>
       <Toggle>
@@ -120,7 +149,9 @@ const FriendBlock = memo(() => {
             </Toggle.Off>
           </Alert>
         </Toggle.OnTime>
-        <Toggle.Trigger>차단 해제</Toggle.Trigger>
+        <Toggle.Trigger>
+          <Accept func={func.block}>차단 해제</Accept>
+        </Toggle.Trigger>
       </Toggle>
     </>
   );
