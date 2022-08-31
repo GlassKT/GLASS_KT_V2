@@ -15,8 +15,12 @@ const title = ({ children }: AlertProps) => {
 const description = ({ children }: AlertProps) => {
   return <Description>{children}</Description>;
 };
+const Off = ({ children }: AlertProps) => {
+  return <button>{children}</button>;
+};
 
 Alert.title = title;
 Alert.description = description;
+Alert.Off = Off;
 
 export default Alert;

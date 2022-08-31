@@ -1,5 +1,5 @@
 import React from "react";
-import FriendItem from "../../components/common/friend/FriendItem";
+import Friend from "../../components/friends";
 import Main from "../../components/main/Main";
 import SelfProfile from "../../components/profile/SelfProfile";
 import MainStyle from "./main.style";
@@ -9,7 +9,15 @@ const MainPage = () => {
     <MainStyle>
       <Main />
       <SelfProfile />
-      <FriendItem />
+      <Friend>
+        <Friend.FriendRequest />
+      </Friend>
+      <Friend>
+        <Friend.FriendList />
+      </Friend>
+      <Friend>
+        <Friend.FriendBlock />
+      </Friend>
     </MainStyle>
   );
 };
