@@ -29,6 +29,7 @@ const Modals = () => {
       <Modal.Request>
         <Toggle.Off>확인</Toggle.Off>
       </Modal.Request>
+      <Toggle.Off>취소</Toggle.Off>
     </Modal>
   );
 };
