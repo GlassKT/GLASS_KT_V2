@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ReducerInterface } from "./type/interface/redux/reducer";
 
-const Login = lazy(() => import("./pages/login/Login"));
+const Login = lazy(() => import("./pages/login"));
 const MainPage = lazy(() => import("./pages/Main"));
 const Register = lazy(() => import("./pages/register"));
 
