@@ -10,14 +10,14 @@ const useRegister = () => {
   const certify = useRef(false);
 
   const registerRequest = useCallback(
-    (e: React.ChangeEvent<HTMLFormElement>) => {
+    async (e: React.ChangeEvent<HTMLFormElement>) => {
       e.preventDefault(); // 새로고침 막기
 
       if (!certify.current) {
         return;
       }
 
-      AuthApi.register({
+      await AuthApi.register({
         id: idRef.current.value,
         pw: pwRef.current.value,
         name: nameRef.current.value,
