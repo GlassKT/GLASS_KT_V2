@@ -9,13 +9,11 @@ const UserReducer = (state: UserState = userState, action: CustomAction) => {
       return {
         ...state,
         login: true,
-        user: action.data,
       };
     case LOGOUT:
       return {
         ...state,
         login: false,
-        user: null,
       };
     default:
       return state;

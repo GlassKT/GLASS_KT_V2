@@ -1,13 +1,30 @@
-import React, { lazy } from "react";
-import { useSelector } from "react-redux";
+import React, { lazy, useCallback, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ReducerInterface } from "./type/interface/redux/reducer";
 
-const Login = lazy(() => import("./pages/login"));
-const MainPage = lazy(() => import("./pages/Main"));
-const Register = lazy(() => import("./pages/register"));
+import Login from "./pages/login";
+import MainPage from "./pages/Main";
+import Register from "./pages/register";
+import AuthApi from "./core/api/Auth/Auth.api";
+import { LOGIN } from "./core/reducers/user/UserAction";
 
 const App = () => {
+  const dispatch = useDispatch();
+
+  const LoginCheck = useCallback(async () => {
+    const value = await AuthApi.loginCheck();
+    if (value) {
+      dispatch({
+        type: LOGIN,
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    LoginCheck();
+  }, []);
+
   const { login } = useSelector((state: ReducerInterface) => state.userReducer);
 
   return (
