@@ -10,7 +10,8 @@
     "allowJs": true,
     "jsx": "react",
     "allowSyntheticDefaultImports": true,
-    "keyofStringsOnly": true
+    "keyofStringsOnly": true,
+    "typeRoots": ["node_modules/@types", "src/types"]
   },
   "typeRoots": ["node_modules/@types", "src/@type"],
   "exclude": [

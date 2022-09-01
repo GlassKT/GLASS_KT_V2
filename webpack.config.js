@@ -26,11 +26,11 @@ module.exports = {
         test: /\.(js|jsx|ts|tsx)$/,
         exclude: /node_module/,
         use: ["swc-loader"],
-        exclude: /node_modules/,
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        type: "asset/resource",
+        use: [{ loader: "file-loader" }],
+        // type: "asset/resource",
       },
       {
         test: /\.css$/,
