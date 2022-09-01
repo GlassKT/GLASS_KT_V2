@@ -19,6 +19,9 @@ const Input = styled.input`
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
 
   flex-shrink: 0;
+
+  outline: none;
+  padding-left: 10px;
 `;
 
 const Label = styled.label`
