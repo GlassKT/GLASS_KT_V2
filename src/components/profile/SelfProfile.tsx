@@ -24,6 +24,7 @@ const SelfProfile = () => {
 const Modals = () => {
   return (
     <Modal>
+      <Modal.Images />
       <Modal.Name />
       <Modal.Hobby />
       <Modal.Request>
