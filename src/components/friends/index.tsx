@@ -1,7 +1,16 @@
 import React, { createContext, memo, useContext, useMemo } from "react";
 import Alert from "../common/alert";
 import Toggle from "../common/toggle/Toggle";
-import { Image, Name, Tags, Tag, Button } from "./Friend";
+import {
+  Image,
+  Name,
+  Tags,
+  Tag,
+  Button,
+  FriendCompoent,
+  ItemContainer,
+  ButtonContainer,
+} from "./Friend";
 import useFriend from "./hooks/useFriend";
 
 interface ButtonProps {
@@ -53,7 +62,9 @@ const FriendContainer = memo(({ item, children }: FriendItemProps) => {
   );
 
   return (
-    <FriendContext.Provider value={value}>{children}</FriendContext.Provider>
+    <FriendContext.Provider value={value}>
+      <FriendCompoent>{children}</FriendCompoent>
+    </FriendContext.Provider>
   );
 });
 
@@ -61,15 +72,17 @@ const Friend = ({ item, children }: FriendItemProps) => {
   return (
     <Friend.FriendContainer item={item}>
       <Image src="" alt="" />
-      <Name>{item.name}</Name>
-      <Tags className="tags">
-        {item.tags.map((v) => (
-          <Tag className="tag" key={v}>
-            {v}
-          </Tag>
-        ))}
-      </Tags>
-      {children}
+      <ItemContainer>
+        <Name>{item.name}</Name>
+        <Tags className="tags">
+          {item.tags.map((v) => (
+            <Tag className="tag" key={v}>
+              {v}
+            </Tag>
+          ))}
+        </Tags>
+        <ButtonContainer>{children}</ButtonContainer>
+      </ItemContainer>
     </Friend.FriendContainer>
   );
 };
@@ -97,13 +110,15 @@ const FriendRequest = memo(() => {
       </Toggle>
       <Toggle>
         <Toggle.OnTime>
-          <Alert.title>수락</Alert.title>
-          <Alert.description>
-            {name}님의 친구요청이 수락되었습니다.
-          </Alert.description>
-          <Toggle.Off>
-            <Alert.Off>확인</Alert.Off>
-          </Toggle.Off>
+          <Alert>
+            <Alert.title>수락</Alert.title>
+            <Alert.description>
+              {name}님의 친구요청이 수락되었습니다.
+            </Alert.description>
+            <Toggle.Off>
+              <Alert.Off>확인</Alert.Off>
+            </Toggle.Off>
+          </Alert>
         </Toggle.OnTime>
         <Toggle.Trigger>
           <Accept func={func.accept}>수락</Accept>
