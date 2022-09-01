@@ -56,4 +56,17 @@ const ItemContainer = styled.div`
   flex-wrap: wrap;
 `;
 
-export { FriendsContainer, Title, TitleText, TitleDes, ItemContainer };
+const Margin42 = styled.div`
+  & + & {
+    margin-top: 42px;
+  }
+`;
+
+export {
+  FriendsContainer,
+  Title,
+  TitleText,
+  TitleDes,
+  ItemContainer,
+  Margin42,
+};
