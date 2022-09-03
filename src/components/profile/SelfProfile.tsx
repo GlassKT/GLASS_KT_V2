@@ -1,23 +1,49 @@
 import React from "react";
 import Modal from "../modal";
 import Toggle from "../common/toggle/Toggle";
+import { Failure, Success } from "../modal/Modal";
+import {
+  SelfContainer,
+  SelftImage,
+  InfoContainer,
+  LabelContainer,
+  Label,
+  LabelTarget,
+  ButtonContainer,
+  Modify,
+  Logout,
+} from "./self.style";
 
 const SelfProfile = () => {
   return (
-    <div>
-      <div className="name"></div>
-      <div className="email"></div>
-      <div className="hobby"></div>
-      <Toggle>
-        <Toggle.On>
-          <SelfProfile.Modals />
-        </Toggle.On>
-        <Toggle.Trigger>
-          <div className="modify">수정</div>
-        </Toggle.Trigger>
-      </Toggle>
-      <div className="logout">로그아웃</div>
-    </div>
+    <SelfContainer>
+      <SelftImage src="" alt="" />
+      <InfoContainer>
+        <LabelContainer>
+          <Label htmlFor="name">이름</Label>
+          <LabelTarget id="name">강성훈</LabelTarget>
+        </LabelContainer>
+        <LabelContainer>
+          <Label htmlFor="email">이메일</Label>
+          <LabelTarget id="email">GlassKT1234@naver.com</LabelTarget>
+        </LabelContainer>
+        <LabelContainer>
+          <Label htmlFor="hobby">취미</Label>
+          <LabelTarget id="hobby">#코딩 #쇼핑</LabelTarget>
+        </LabelContainer>
+      </InfoContainer>
+      <ButtonContainer>
+        <Logout>로그아웃</Logout>
+        <Toggle>
+          <Toggle.On>
+            <SelfProfile.Modals />
+          </Toggle.On>
+          <Toggle.Trigger>
+            <Modify>수정</Modify>
+          </Toggle.Trigger>
+        </Toggle>
+      </ButtonContainer>
+    </SelfContainer>
   );
 };
 
@@ -27,10 +53,16 @@ const Modals = () => {
       <Modal.Images />
       <Modal.Name />
       <Modal.Hobby />
-      <Modal.Request>
-        <Toggle.Off>확인</Toggle.Off>
-      </Modal.Request>
-      <Toggle.Off>취소</Toggle.Off>
+      <div style={{ display: "flex", gap: "24px" }}>
+        <Modal.Request>
+          <Toggle.Off>
+            <Success>확인</Success>
+          </Toggle.Off>
+        </Modal.Request>
+        <Toggle.Off>
+          <Failure>취소</Failure>
+        </Toggle.Off>
+      </div>
     </Modal>
   );
 };

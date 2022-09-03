@@ -128,6 +128,42 @@ const ModalContainer = styled.div`
   align-items: center;
 `;
 
+const Success = styled.div`
+  width: 188px;
+  height: 60px;
+  background: #000000;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+
+  color: white;
+  border: none;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 26px;
+`;
+const Failure = styled.div`
+  border: none;
+  color: white;
+  width: 188px;
+  height: 60px;
+  background: linear-gradient(
+    180deg,
+    #5c9dff 0%,
+    rgba(92, 157, 255, 0.51) 100%
+  );
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 26px;
+`;
+
 export {
   InputName,
   HobbyContainer,
@@ -141,6 +177,8 @@ export {
   Flex,
   InputHobby,
   HobbyItem,
+  Success,
+  Failure,
 };
 
 interface Input {
