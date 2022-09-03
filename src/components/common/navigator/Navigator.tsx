@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import useNavBar from "./hooks/useNavigator";
 
@@ -26,11 +27,31 @@ const Navigator = () => {
   useNavBar();
   return (
     <NavigatorContainer>
-      <Li>홈</Li>
-      <Li>친구</Li>
-      <Li>추천 친구</Li>
-      <Li>채팅</Li>
-      <Li>내 프로필</Li>
+      <Li>
+        <Link to="/" style={{ textDecoration: "none", color: "black" }}>
+          홈
+        </Link>
+      </Li>
+      <Li>
+        <Link to="/friends" style={{ textDecoration: "none", color: "black" }}>
+          친구
+        </Link>
+      </Li>
+      <Li>
+        <Link to="/recomand" style={{ textDecoration: "none", color: "black" }}>
+          추천 친구
+        </Link>
+      </Li>
+      <Li>
+        <Link to="/chat" style={{ textDecoration: "none", color: "black" }}>
+          채팅
+        </Link>
+      </Li>
+      <Li>
+        <Link to="/profile" style={{ textDecoration: "none", color: "black" }}>
+          내 프로필
+        </Link>
+      </Li>
     </NavigatorContainer>
   );
 };
