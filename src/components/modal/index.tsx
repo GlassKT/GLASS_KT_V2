@@ -3,9 +3,16 @@ import useModal from "./hooks/useModal";
 import {
   HobbyContainer,
   InputName,
+  InputHobby,
   HobbyAdd,
   HobbyItemContainer,
   RequestButton,
+  ModalContainer,
+  Image,
+  NameContainer,
+  Label,
+  Flex,
+  HobbyItem,
 } from "./Modal";
 
 interface ModalProps {
@@ -65,13 +72,24 @@ const Modal = ({ children }: ModalProps) => {
   );
 
   return (
-    <ModalContext.Provider value={value}>{children}</ModalContext.Provider>
+    <ModalContext.Provider value={value}>
+      <ModalContainer>{children}</ModalContainer>
+    </ModalContext.Provider>
   );
+};
+
+const Images = () => {
+  return <Image />;
 };
 
 const Name = memo(() => {
   const { name, nameChange } = useContext(ModalContext);
-  return <InputName type="text" value={name} onChange={nameChange} />;
+  return (
+    <NameContainer>
+      <Label>이름</Label>
+      <InputName type="text" value={name} onChange={nameChange} />
+    </NameContainer>
+  );
 });
 
 const Hobby = memo(() => {
@@ -79,11 +97,22 @@ const Hobby = memo(() => {
     useContext(ModalContext);
   return (
     <HobbyContainer>
-      <InputName type="text" value={hobbyInput} onChange={changeHobbyInput} />
-      <HobbyAdd onClick={hobbyChange}>추가</HobbyAdd>
-      {hobby.map((v) => (
-        <HobbyItemContainer item={v}></HobbyItemContainer>
-      ))}
+      <NameContainer>
+        <Label>취미</Label>
+        <Flex>
+          <InputHobby
+            type="text"
+            value={hobbyInput}
+            onChange={changeHobbyInput}
+          />
+          <HobbyAdd onClick={hobbyChange}>추가</HobbyAdd>
+        </Flex>
+      </NameContainer>
+      <HobbyItemContainer>
+        {hobby.map((v) => (
+          <HobbyItem>{v}</HobbyItem>
+        ))}
+      </HobbyItemContainer>
     </HobbyContainer>
   );
 });
@@ -96,4 +125,5 @@ const Request = memo(({ children }: ModalProps) => {
 Modal.Name = Name;
 Modal.Hobby = Hobby;
 Modal.Request = Request;
+Modal.Images = Images;
 export default Modal;
