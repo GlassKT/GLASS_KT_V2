@@ -38,7 +38,10 @@ const Navigator = () => {
         </Link>
       </Li>
       <Li>
-        <Link to="/recomand" style={{ textDecoration: "none", color: "black" }}>
+        <Link
+          to="/recommend"
+          style={{ textDecoration: "none", color: "black" }}
+        >
           추천 친구
         </Link>
       </Li>

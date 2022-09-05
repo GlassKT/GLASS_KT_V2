@@ -148,7 +148,47 @@ const FriendList = memo(() => {
           <Refuse func={func.remove}>삭제</Refuse>
         </Toggle.Trigger>
       </Toggle>
-      <Accept func={func.chat}>1:1 채팅</Accept>
+      <Toggle>
+        <Toggle.OnTime>
+          <Alert>
+            <Alert.title>친구 요청</Alert.title>
+            <Alert.description>
+              {name}님의 친구요청되었습니다.
+            </Alert.description>
+            <Toggle.Off>
+              <Alert.Off>확인</Alert.Off>
+            </Toggle.Off>
+          </Alert>
+        </Toggle.OnTime>
+        <Toggle.Trigger>
+          <Accept func={func.accept}>친구 요청</Accept>
+        </Toggle.Trigger>
+      </Toggle>
+    </>
+  );
+});
+
+const FriendRecommend = memo(() => {
+  const { func, name } = useContext(FriendContext);
+  return (
+    <>
+      <Toggle>
+        <Toggle.OnTime>
+          <Alert>
+            <Alert.title>차단</Alert.title>
+            <Alert.description>
+              {name}님이 친구목록에서 차단되었습니다.
+            </Alert.description>
+            <Toggle.Off>
+              <Alert.Off>확인</Alert.Off>
+            </Toggle.Off>
+          </Alert>
+        </Toggle.OnTime>
+        <Toggle.Trigger>
+          <Refuse func={func.remove}>차단</Refuse>
+        </Toggle.Trigger>
+      </Toggle>
+      <Accept func={func.chat}>친구 요청</Accept>
     </>
   );
 });
@@ -181,6 +221,7 @@ Friend.FriendContainer = FriendContainer;
 Friend.FriendRequest = FriendRequest;
 Friend.FriendList = FriendList;
 Friend.FriendBlock = FriendBlock;
+Friend.FriendRecommend = FriendRecommend;
 
 export default Friend;
 

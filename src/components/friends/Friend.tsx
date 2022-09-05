@@ -30,6 +30,13 @@ const ItemContainer = styled.div`
   height: 95px;
 `;
 
+const ItemContainer2 = styled.div`
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+`;
+
 const Name = styled.div`
   font-weight: 500;
   font-size: 18px;
@@ -87,4 +94,5 @@ export {
   FriendCompoent,
   ItemContainer,
   ButtonContainer,
+  ItemContainer2,
 };
