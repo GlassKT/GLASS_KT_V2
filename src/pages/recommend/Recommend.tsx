@@ -9,4 +9,18 @@ const RecommendContainer = styled.div`
   min-height: 100vh;
 `;
 
-export { RecommendContainer };
+const Title = styled.div`
+  height: 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+`;
+
+const TitleName = styled.div`
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 48px;
+`;
+
+export { RecommendContainer, Title, TitleName };
