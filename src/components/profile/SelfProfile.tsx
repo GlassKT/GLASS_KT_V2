@@ -50,9 +50,17 @@ const SelfProfile = () => {
 const Modals = () => {
   return (
     <Modal>
-      <Modal.Images />
-      <Modal.Name />
-      <Modal.Hobby />
+      <div style={{ height: "768px", marginLeft: "50px", marginRight: "88px" }}>
+        <Modal.Images />
+        <Modal.Description />
+        <Modal.Name />
+        <Modal.Id />
+      </div>
+      <div>
+        <Modal.Hobby />
+        <Modal.Birth />
+        <Modal.Area />
+      </div>
       <div style={{ display: "flex", gap: "24px" }}>
         <Modal.Request>
           <Toggle.Off>

@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 const NameContainer = styled.div`
-  width: 400px;
-  height: 104px;
+  width: 260px;
+  height: 90px;
 
   display: flex;
   flex-direction: column;
@@ -74,7 +74,7 @@ const HobbyAdd = styled.button`
 `;
 
 const HobbyItemContainer = styled.div`
-  width: 400px;
+  width: 260px;
   margin-top: 40px;
 
   display: flex;
@@ -108,11 +108,12 @@ const Image = styled.img`
   border: 1px solid black;
 
   margin-top: 60px;
+  transform: translate(25%, 0);
 `;
 
 const ModalContainer = styled.div`
-  width: 480px;
-  height: 738px;
+  width: 737px;
+  height: 876px;
 
   background: #ffffff;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
@@ -124,7 +125,6 @@ const ModalContainer = styled.div`
   transform: translate(-50%, -50%);
 
   display: flex;
-  flex-direction: column;
   align-items: center;
 `;
 
@@ -144,6 +144,25 @@ const Success = styled.div`
   font-size: 18px;
   line-height: 26px;
 `;
+const DescriptionContainer = styled.div`
+  width: 260px;
+  height: 105px;
+  background: #ffffff;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+
+  margin-top: 37.22px;
+  margin-bottom: 18px;
+  padding: 10px;
+`;
+
+const DesTextArea = styled.textarea`
+  width: 234px;
+  height: 78px;
+  border: none;
+  outline: none;
+  resize: none;
+`;
+
 const Failure = styled.div`
   border: none;
   color: white;
@@ -179,6 +198,8 @@ export {
   HobbyItem,
   Success,
   Failure,
+  DescriptionContainer,
+  DesTextArea,
 };
 
 interface Input {

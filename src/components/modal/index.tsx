@@ -13,6 +13,8 @@ import {
   Label,
   Flex,
   HobbyItem,
+  DescriptionContainer,
+  DesTextArea,
 } from "./Modal";
 
 interface ModalProps {
@@ -82,12 +84,29 @@ const Images = () => {
   return <Image />;
 };
 
+const Description = () => {
+  return (
+    <DescriptionContainer>
+      <DesTextArea spellCheck="false"></DesTextArea>
+    </DescriptionContainer>
+  );
+};
+
 const Name = memo(() => {
   const { name, nameChange } = useContext(ModalContext);
   return (
     <NameContainer>
       <Label>이름</Label>
       <InputName type="text" value={name} onChange={nameChange} />
+    </NameContainer>
+  );
+});
+
+const Id = memo(() => {
+  return (
+    <NameContainer>
+      <Label>아이디</Label>
+      <InputName type="text" value="sdf" onChange={() => {}} />
     </NameContainer>
   );
 });
@@ -117,6 +136,24 @@ const Hobby = memo(() => {
   );
 });
 
+const Birth = () => {
+  return (
+    <NameContainer>
+      <Label>생일</Label>
+      <InputName type="text" value="sdf" onChange={() => {}} />
+    </NameContainer>
+  );
+};
+
+const Area = () => {
+  return (
+    <NameContainer>
+      <Label>지역</Label>
+      <InputName type="text" value="sdf" onChange={() => {}} />
+    </NameContainer>
+  );
+};
+
 const Request = memo(({ children }: ModalProps) => {
   const { request } = useContext(ModalContext);
   return <RequestButton onClick={request}>{children}</RequestButton>;
@@ -126,4 +163,9 @@ Modal.Name = Name;
 Modal.Hobby = Hobby;
 Modal.Request = Request;
 Modal.Images = Images;
+Modal.Description = Description;
+Modal.Id = Id;
+Modal.Birth = Birth;
+Modal.Area = Area;
+
 export default Modal;
