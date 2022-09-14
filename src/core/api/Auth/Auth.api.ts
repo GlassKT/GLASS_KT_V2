@@ -40,7 +40,6 @@ class Auth {
       await CustomAxios.post("");
       return true;
     } catch (e) {
-      // console.log(e.response.data.message === "vaild error");
       return false;
     }
   }
