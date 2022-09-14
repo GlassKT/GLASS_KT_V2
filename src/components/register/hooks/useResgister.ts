@@ -33,9 +33,9 @@ const useRegister = () => {
   }, []);
 
   const sendEmail = useCallback(() => {
-    console.log("이메일로 전송되었습니다");
+    AuthApi.emailSend(emailRef.current.value);
     changeCertify();
-  }, []);
+  }, [emailRef]);
 
   const changeCertify = useCallback(() => {
     certify.current = true;

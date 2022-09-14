@@ -29,6 +29,15 @@ interface ModalContextType {
   hobbyChange: () => void;
   changeHobbyInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
   request: () => void;
+  id: string;
+  changeDate: (e: any) => void;
+  date: (string | number | readonly string[]) & string;
+  area: string;
+  changeArea: (e: any) => void;
+  email: string;
+  changeEmail: (e: any) => void;
+  mbti: string;
+  changeMbti: (e: any) => void;
 }
 
 const ModalContext = createContext<ModalContextType>({
@@ -39,6 +48,15 @@ const ModalContext = createContext<ModalContextType>({
   nameChange: null,
   changeHobbyInput: null,
   request: null,
+  id: null,
+  changeDate: null,
+  date: null,
+  area: null,
+  changeArea: null,
+  email: null,
+  changeEmail: null,
+  mbti: null,
+  changeMbti: null,
 });
 
 const Modal = ({ children }: ModalProps) => {
@@ -50,6 +68,15 @@ const Modal = ({ children }: ModalProps) => {
     changeName,
     changeHobbyInput,
     request,
+    id,
+    changeDate,
+    date,
+    area,
+    changeArea,
+    email,
+    changeEmail,
+    mbti,
+    changeMbti,
   } = useModal();
 
   const value: ModalContextType = useMemo(
@@ -61,6 +88,15 @@ const Modal = ({ children }: ModalProps) => {
       nameChange: changeName,
       changeHobbyInput: changeHobbyInput,
       request: request,
+      id,
+      changeDate,
+      date,
+      area,
+      changeArea,
+      email,
+      changeEmail,
+      mbti,
+      changeMbti,
     }),
     [
       name,
@@ -70,6 +106,15 @@ const Modal = ({ children }: ModalProps) => {
       hobbyChange,
       changeHobbyInput,
       request,
+      id,
+      changeDate,
+      date,
+      area,
+      changeArea,
+      email,
+      changeEmail,
+      mbti,
+      changeMbti,
     ]
   );
 
@@ -103,10 +148,11 @@ const Name = memo(() => {
 });
 
 const Id = memo(() => {
+  const { id } = useContext(ModalContext);
   return (
     <NameContainer>
       <Label>아이디</Label>
-      <InputName type="text" value="sdf" onChange={() => {}} />
+      <InputName type="text" value={id} onChange={() => {}} />
     </NameContainer>
   );
 });
@@ -137,19 +183,45 @@ const Hobby = memo(() => {
 });
 
 const Birth = () => {
+  const { date, changeDate } = useContext(ModalContext);
+
   return (
     <NameContainer>
       <Label>생일</Label>
-      <InputName type="text" value="sdf" onChange={() => {}} />
+      <InputName type="date" value={date} onChange={changeDate} />
     </NameContainer>
   );
 };
 
 const Area = () => {
+  const { area, changeArea } = useContext(ModalContext);
+
   return (
     <NameContainer>
       <Label>지역</Label>
-      <InputName type="text" value="sdf" onChange={() => {}} />
+      <InputName type="text" value={area} onChange={changeArea} />
+    </NameContainer>
+  );
+};
+
+const Email = () => {
+  const { email, changeEmail } = useContext(ModalContext);
+
+  return (
+    <NameContainer>
+      <Label>이메일</Label>
+      <InputName type="email" value={email} onChange={changeEmail} />
+    </NameContainer>
+  );
+};
+
+const MBTI = () => {
+  const { mbti, changeMbti } = useContext(ModalContext);
+
+  return (
+    <NameContainer>
+      <Label>MBTI</Label>
+      <InputName type="text" value={mbti} onChange={changeMbti} />
     </NameContainer>
   );
 };
@@ -167,5 +239,7 @@ Modal.Description = Description;
 Modal.Id = Id;
 Modal.Birth = Birth;
 Modal.Area = Area;
+Modal.Email = Email;
+Modal.MBTI = MBTI;
 
 export default Modal;

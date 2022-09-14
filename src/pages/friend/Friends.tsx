@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Back from "../../assets/images/background.png";
 
 const FriendsContainer = styled.div`
-  height: 100vh;
+  min-height: 100vh;
   padding-left: 250px;
   background: url(${Back});
 `;
