@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Left from "../../components/common/left";
 import Navigator from "../../components/common/navigator";
 import SelfProfile from "../../components/profile/SelfProfile";
@@ -11,8 +11,15 @@ import {
   TitleText,
 } from "../../pages/friend/Friends";
 import Friend from "../../components/friends";
+import FriendsApi from "../../core/api/friends/Friends.api";
 
 const Profile = () => {
+  const [block, setBlock] = useState<any>();
+
+  useEffect(() => {
+    FriendsApi.getBlockFriend(setBlock);
+  }, []);
+
   return (
     <ProfileContainer>
       <Left />
@@ -25,31 +32,12 @@ const Profile = () => {
           <TitleDes color="false">총 6명</TitleDes>
         </Title>
         <ItemContainer>
-          <Friend
-            item={{ id: 1, name: "박성한", tags: ["#볼링", "#축구", "#코딩"] }}
-          >
-            <Friend.FriendBlock />
-          </Friend>
-          <Friend
-            item={{ id: 1, name: "박성한", tags: ["#볼링", "#축구", "#코딩"] }}
-          >
-            <Friend.FriendBlock />
-          </Friend>
-          <Friend
-            item={{ id: 1, name: "박성한", tags: ["#볼링", "#축구", "#코딩"] }}
-          >
-            <Friend.FriendBlock />
-          </Friend>
-          <Friend
-            item={{ id: 1, name: "박성한", tags: ["#볼링", "#축구", "#코딩"] }}
-          >
-            <Friend.FriendBlock />
-          </Friend>
-          <Friend
-            item={{ id: 1, name: "박성한", tags: ["#볼링", "#축구", "#코딩"] }}
-          >
-            <Friend.FriendBlock />
-          </Friend>
+          {block &&
+            block.map((v) => (
+              <Friend item={v}>
+                <Friend.FriendBlock />
+              </Friend>
+            ))}
         </ItemContainer>
       </div>
     </ProfileContainer>

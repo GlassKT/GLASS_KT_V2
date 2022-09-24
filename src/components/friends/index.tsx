@@ -25,7 +25,7 @@ interface FriendProps {
 interface FriendType {
   id: number;
   name: string;
-  tags: string[];
+  hobby: string[];
 }
 
 interface FriendFuncType {
@@ -45,7 +45,7 @@ interface FriendItemProps extends FriendProps {
 const FriendContext = createContext<FriendType & FriendFuncType>({
   id: null,
   name: null,
-  tags: [],
+  hobby: [],
   func: null,
 });
 
@@ -55,7 +55,7 @@ const FriendContainer = memo(({ item, children }: FriendItemProps) => {
     () => ({
       id: item.id,
       name: item.name,
-      tags: item.tags,
+      hobby: item.hobby,
       func: func,
     }),
     [item, func]
@@ -75,7 +75,7 @@ const Friend = ({ item, children }: FriendItemProps) => {
       <ItemContainer>
         <Name>{item.name}</Name>
         <Tags className="tags">
-          {item.tags.map((v) => (
+          {item.hobby.map((v) => (
             <Tag className="tag" key={v}>
               {v}
             </Tag>
@@ -145,25 +145,10 @@ const FriendList = memo(() => {
           </Alert>
         </Toggle.OnTime>
         <Toggle.Trigger>
-          <Refuse func={func.remove}>삭제</Refuse>
+          <Refuse func={func.refuse}>삭제</Refuse>
         </Toggle.Trigger>
       </Toggle>
-      <Toggle>
-        <Toggle.OnTime>
-          <Alert>
-            <Alert.title>친구 요청</Alert.title>
-            <Alert.description>
-              {name}님의 친구요청되었습니다.
-            </Alert.description>
-            <Toggle.Off>
-              <Alert.Off>확인</Alert.Off>
-            </Toggle.Off>
-          </Alert>
-        </Toggle.OnTime>
-        <Toggle.Trigger>
-          <Accept func={func.accept}>친구 요청</Accept>
-        </Toggle.Trigger>
-      </Toggle>
+      <Accept func={func.chat}>1:1 채팅</Accept>
     </>
   );
 });
@@ -188,7 +173,7 @@ const FriendRecommend = memo(() => {
           <Refuse func={func.remove}>차단</Refuse>
         </Toggle.Trigger>
       </Toggle>
-      <Accept func={func.chat}>친구 요청</Accept>
+      <Accept func={func.chat}>1:1 채팅</Accept>
     </>
   );
 });

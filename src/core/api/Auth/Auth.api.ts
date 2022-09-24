@@ -10,6 +10,7 @@ class Auth {
         pw,
       });
       localStorage.setItem("Authorization", response.data.accessToken);
+      localStorage.setItem("user", response.data.id);
       return true;
     } catch (e) {
       return false;

@@ -15,27 +15,27 @@ const Recommend = () => {
       </Title>
       <ItemContainer2>
         <Friend
-          item={{ id: 1, name: "박성한", tags: ["#볼링", "#축구", "#코딩"] }}
+          item={{ id: 1, name: "박성한", hobby: ["#볼링", "#축구", "#코딩"] }}
         >
           <Friend.FriendRecommend />
         </Friend>
         <Friend
-          item={{ id: 1, name: "박성한", tags: ["#볼링", "#축구", "#코딩"] }}
+          item={{ id: 1, name: "박성한", hobby: ["#볼링", "#축구", "#코딩"] }}
         >
           <Friend.FriendRecommend />
         </Friend>
         <Friend
-          item={{ id: 1, name: "박성한", tags: ["#볼링", "#축구", "#코딩"] }}
+          item={{ id: 1, name: "박성한", hobby: ["#볼링", "#축구", "#코딩"] }}
         >
           <Friend.FriendRecommend />
         </Friend>
         <Friend
-          item={{ id: 1, name: "박성한", tags: ["#볼링", "#축구", "#코딩"] }}
+          item={{ id: 1, name: "박성한", hobby: ["#볼링", "#축구", "#코딩"] }}
         >
           <Friend.FriendRecommend />
         </Friend>
         <Friend
-          item={{ id: 1, name: "박성한", tags: ["#볼링", "#축구", "#코딩"] }}
+          item={{ id: 1, name: "박성한", hobby: ["#볼링", "#축구", "#코딩"] }}
         >
           <Friend.FriendRecommend />
         </Friend>

@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Left from "../../components/common/left";
 import Navigator from "../../components/common/navigator";
 import Friend from "../../components/friends";
+import FriendsApi from "../../core/api/friends/Friends.api";
 import {
   FriendsContainer,
   ItemContainer,
@@ -12,6 +13,14 @@ import {
 } from "./Friends";
 
 const Friends = () => {
+  const [waitFreinds, setWaitFreinds] = useState<any>();
+  const [freinds, setFreinds] = useState<any>();
+
+  useEffect(() => {
+    FriendsApi.getWaitFriend(setWaitFreinds);
+    FriendsApi.getFriend(setFreinds);
+  }, []);
+
   return (
     <FriendsContainer>
       <Left />
@@ -23,65 +32,26 @@ const Friends = () => {
           <TitleDes color="false">전송한 요청</TitleDes>
         </Title>
         <ItemContainer>
-          <Friend
-            item={{ id: 1, name: "박성한", tags: ["#볼링", "#축구", "#코딩"] }}
-          >
-            <Friend.FriendRequest />
-          </Friend>
-          <Friend
-            item={{ id: 1, name: "박성한", tags: ["#볼링", "#축구", "#코딩"] }}
-          >
-            <Friend.FriendRequest />
-          </Friend>
-          <Friend
-            item={{ id: 1, name: "박성한", tags: ["#볼링", "#축구", "#코딩"] }}
-          >
-            <Friend.FriendRequest />
-          </Friend>
-          <Friend
-            item={{ id: 1, name: "박성한", tags: ["#볼링", "#축구", "#코딩"] }}
-          >
-            <Friend.FriendRequest />
-          </Friend>
-          <Friend
-            item={{ id: 1, name: "박성한", tags: ["#볼링", "#축구", "#코딩"] }}
-          >
-            <Friend.FriendRequest />
-          </Friend>
+          {waitFreinds &&
+            waitFreinds.map((v) => (
+              <Friend item={v} key={v.id}>
+                <Friend.FriendRequest />
+              </Friend>
+            ))}
         </ItemContainer>
       </Margin42>
       <Margin42>
         <Title width="309px">
-          <TitleText>친구 요청</TitleText>
-          <TitleDes color="true">받은 요청</TitleDes>
-          <TitleDes color="false">전송한 요청</TitleDes>
+          <TitleText>친구목록</TitleText>
+          <TitleDes color="false">총 {freinds && freinds.length}명</TitleDes>
         </Title>
         <ItemContainer>
-          <Friend
-            item={{ id: 1, name: "박성한", tags: ["#볼링", "#축구", "#코딩"] }}
-          >
-            <Friend.FriendList />
-          </Friend>
-          <Friend
-            item={{ id: 1, name: "박성한", tags: ["#볼링", "#축구", "#코딩"] }}
-          >
-            <Friend.FriendList />
-          </Friend>
-          <Friend
-            item={{ id: 1, name: "박성한", tags: ["#볼링", "#축구", "#코딩"] }}
-          >
-            <Friend.FriendList />
-          </Friend>
-          <Friend
-            item={{ id: 1, name: "박성한", tags: ["#볼링", "#축구", "#코딩"] }}
-          >
-            <Friend.FriendList />
-          </Friend>
-          <Friend
-            item={{ id: 1, name: "박성한", tags: ["#볼링", "#축구", "#코딩"] }}
-          >
-            <Friend.FriendList />
-          </Friend>
+          {freinds &&
+            freinds.map((v) => (
+              <Friend item={v} key={v.id}>
+                <Friend.FriendList />
+              </Friend>
+            ))}
         </ItemContainer>
       </Margin42>
     </FriendsContainer>
