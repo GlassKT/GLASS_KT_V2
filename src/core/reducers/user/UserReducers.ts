@@ -9,6 +9,7 @@ const UserReducer = (state: UserState = userState, action: CustomAction) => {
       return {
         ...state,
         login: true,
+        password: false,
       };
     case LOGOUT:
       return {

@@ -2,6 +2,7 @@ import React, { lazy, useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ReducerInterface } from "./type/interface/redux/reducer";
+import Home from "./pages/home/index";
 
 import Login from "./pages/login";
 import MainPage from "./pages/Main";
@@ -35,6 +36,7 @@ const App = () => {
             <Route path="/" element={<MainPage />}></Route>
             <Route path="/profile" element={<div>profile</div>}></Route>
             <Route path="*" element={<div>error page</div>}></Route>
+            <Route path="/home" element={<Home />}></Route>
           </>
         ) : (
           <>
