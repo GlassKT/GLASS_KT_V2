@@ -27,6 +27,7 @@ const RightImage = styled.div`
   img {
     width: 100%;
   }
+  overflow: hidden;
 `;
 
 export { RegisterStyle, RightImage };

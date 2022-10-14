@@ -6,7 +6,6 @@ import useNavBar from "./hooks/useNavigator";
 const NavigatorContainer = styled.ul`
   width: 545px;
   height: 120px;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
