@@ -10,17 +10,17 @@ const MainPage = () => {
       <Main />
       <SelfProfile />
       <Friend
-        item={{ id: 1, name: "박성한", tags: ["#볼링", "#축구", "#코딩"] }}
+        item={{ id: 1, name: "박성한", hobby: ["#볼링", "#축구", "#코딩"] }}
       >
         <Friend.FriendRequest />
       </Friend>
       <Friend
-        item={{ id: 1, name: "박성한", tags: ["#볼링", "#축구", "#코딩"] }}
+        item={{ id: 1, name: "박성한", hobby: ["#볼링", "#축구", "#코딩"] }}
       >
         <Friend.FriendList />
       </Friend>
       <Friend
-        item={{ id: 1, name: "박성한", tags: ["#볼링", "#축구", "#코딩"] }}
+        item={{ id: 1, name: "박성한", hobby: ["#볼링", "#축구", "#코딩"] }}
       >
         <Friend.FriendBlock />
       </Friend>

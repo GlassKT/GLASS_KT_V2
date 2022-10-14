@@ -10,6 +10,7 @@ class Auth {
         pw,
       });
       localStorage.setItem("Authorization", response.data.accessToken);
+      localStorage.setItem("user", response.data.id);
       return true;
     } catch (e) {
       return false;
@@ -37,10 +38,9 @@ class Auth {
 
   public async loginCheck() {
     try {
-      await CustomAxios.post("/glasskt");
+      await CustomAxios.post("");
       return true;
     } catch (e) {
-      // console.log(e.response.data.message === "vaild error");
       return false;
     }
   }
@@ -49,6 +49,16 @@ class Auth {
     try {
       await CustomAxios.post("/logout");
       return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  public async emailSend(email: string) {
+    try {
+      const { data } = await CustomAxios.get(`/emailauth?email=${email}`);
+      console.log(data);
+      return data;
     } catch (e) {
       return false;
     }

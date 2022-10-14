@@ -1,9 +1,11 @@
+import FriendsApi from "../../../core/api/friends/Friends.api";
+
 const useFriend = (id: number) => {
   const refuse = () => {
-    console.log("refuse", id);
+    FriendsApi.refuseFriend(id);
   };
   const accept = () => {
-    console.log("accept", id);
+    FriendsApi.acceptFriend(id);
   };
   const remove = () => {
     console.log("remove", id);
