@@ -38,7 +38,7 @@ class Auth {
 
   public async loginCheck() {
     try {
-      await CustomAxios.post("");
+      await CustomAxios.post("/token");
       return true;
     } catch (e) {
       return false;

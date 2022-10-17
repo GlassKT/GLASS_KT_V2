@@ -16,6 +16,7 @@ import {
   DescriptionContainer,
   DesTextArea,
 } from "./Modal";
+import test from "../../assets/images/test.png";
 
 interface ModalProps {
   children: React.ReactNode;
@@ -126,7 +127,7 @@ const Modal = ({ children }: ModalProps) => {
 };
 
 const Images = () => {
-  return <Image />;
+  return <Image src={test} />;
 };
 
 const Description = () => {
