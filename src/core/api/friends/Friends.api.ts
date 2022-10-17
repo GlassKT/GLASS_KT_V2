@@ -2,10 +2,14 @@ import CustomAxios from "../../util/CustomAxios";
 
 class Friends {
   public async getWaitFriend(setWaitFriends) {
-    const value = await CustomAxios.get(
-      `/getwaitfriend?user=${localStorage.getItem("user")}`
-    );
-    setWaitFriends(value.data.data);
+    try {
+      const value = await CustomAxios.get(
+        `/getwaitfriend?user=${localStorage.getItem("user")}`
+      );
+      return value.data.data;
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   public async acceptFriend(id: any) {
@@ -23,10 +27,14 @@ class Friends {
   }
 
   public async getFriend(setFriends: any) {
-    const value = await CustomAxios.get(
-      `/getfriend?user=${localStorage.getItem("user")}`
-    );
-    setFriends(value.data.data);
+    try {
+      const value = await CustomAxios.get(
+        `/getfriend?user=${localStorage.getItem("user")}`
+      );
+      return value.data.data;
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   public async getBlockFriend(setBlock: any) {

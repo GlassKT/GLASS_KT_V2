@@ -5,7 +5,6 @@ import React, {
   useMemo,
   useState,
 } from "react";
-import styled from "styled-components";
 import useEffectAfterMount from "../../../core/hooks/useEffetAfterMount";
 import useTimeOut from "../../../core/hooks/useTimeOut";
 
