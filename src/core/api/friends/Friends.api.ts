@@ -50,6 +50,13 @@ class Friends {
       friend: id,
     });
   }
+
+  public async recommendFriend() {
+    const id = localStorage.getItem("user");
+    const { data } = await CustomAxios.get(`/recommandfriendfriends?id=${id}`);
+    console.log(data.data);
+    return data.data;
+  }
 }
 
 export default new Friends();
