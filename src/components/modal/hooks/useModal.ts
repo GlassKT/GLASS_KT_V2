@@ -1,4 +1,5 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import UserApi from "../../../core/api/user/User.api";
 
 const useModal = () => {
   const [name, setName] = useState("");
@@ -9,6 +10,25 @@ const useModal = () => {
   const [area, setArea] = useState("");
   const [email, setEmail] = useState("");
   const [mbti, setMbti] = useState("");
+  const [introduce, setIntroduce] = useState("");
+  const [birthday, setBirthday] = useState("");
+
+  useEffect(() => {
+    getUser();
+  }, []);
+
+  const getUser = async () => {
+    const res = await UserApi.getUser();
+    console.log(res);
+    setName(res.name);
+    setHobby([...res.hobby]);
+    setArea(res.area);
+    setId(res.id);
+    setMbti(res.mbti);
+    setEmail(res.email);
+    setDate(res.birthday);
+    setIntroduce(res.introduce);
+  };
 
   const changeMbti = (e: any) => {
     setMbti(e.target.value);
@@ -44,7 +64,25 @@ const useModal = () => {
     [hobbyInput]
   );
 
-  const request = () => {};
+  const changeIntroduce = (e: any) => {
+    setIntroduce(e.target.value);
+  };
+
+  const changeBirthday = (e: any) => {
+    setBirthday(e.target.value);
+  };
+
+  const request = async () => {
+    const res = await UserApi.edituser({
+      id: localStorage.getItem("user"),
+      name,
+      email,
+      mbti,
+      area,
+      introduce,
+      birthday: date,
+    });
+  };
 
   return {
     name,
@@ -62,7 +100,11 @@ const useModal = () => {
     email,
     changeEmail,
     mbti,
+    introduce,
+    birthday,
     changeMbti,
+    changeIntroduce,
+    changeBirthday,
   };
 };
 

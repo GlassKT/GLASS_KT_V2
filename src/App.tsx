@@ -12,6 +12,7 @@ import { LOGIN } from "./core/reducers/user/UserAction";
 import Friends from "./pages/friend";
 import Profile from "./pages/profile";
 import Recommend from "./pages/recommend";
+import ChatPage from "./pages/chat";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -40,8 +41,9 @@ const App = () => {
             <Route path="/profile" element={<Profile />}></Route>
             <Route path="/friends" element={<Friends />}></Route>
             <Route path="/recommend" element={<Recommend />}></Route>
-            <Route path="*" element={<div>error page</div>}></Route>
+            <Route path="/chat" element={<ChatPage />}></Route>
             <Route path="/home" element={<Home />}></Route>
+            <Route path="*" element={<div>error page</div>}></Route>
           </>
         ) : (
           <>

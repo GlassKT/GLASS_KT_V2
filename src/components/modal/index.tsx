@@ -39,6 +39,10 @@ interface ModalContextType {
   changeEmail: (e: any) => void;
   mbti: string;
   changeMbti: (e: any) => void;
+  introduce: string;
+  changeIntroduce: (e: any) => void;
+  birthday: any;
+  changeBirthday: (e: any) => void;
 }
 
 const ModalContext = createContext<ModalContextType>({
@@ -58,6 +62,10 @@ const ModalContext = createContext<ModalContextType>({
   changeEmail: null,
   mbti: null,
   changeMbti: null,
+  introduce: null,
+  changeIntroduce: null,
+  birthday: null,
+  changeBirthday: null,
 });
 
 const Modal = ({ children }: ModalProps) => {
@@ -78,6 +86,10 @@ const Modal = ({ children }: ModalProps) => {
     changeEmail,
     mbti,
     changeMbti,
+    introduce,
+    changeIntroduce,
+    birthday,
+    changeBirthday,
   } = useModal();
 
   const value: ModalContextType = useMemo(
@@ -98,6 +110,10 @@ const Modal = ({ children }: ModalProps) => {
       changeEmail,
       mbti,
       changeMbti,
+      introduce,
+      changeIntroduce,
+      birthday,
+      changeBirthday,
     }),
     [
       name,
@@ -116,6 +132,10 @@ const Modal = ({ children }: ModalProps) => {
       changeEmail,
       mbti,
       changeMbti,
+      introduce,
+      changeIntroduce,
+      birthday,
+      changeBirthday,
     ]
   );
 
@@ -131,9 +151,14 @@ const Images = () => {
 };
 
 const Description = () => {
+  const { introduce, changeIntroduce } = useContext(ModalContext);
   return (
     <DescriptionContainer>
-      <DesTextArea spellCheck="false"></DesTextArea>
+      <DesTextArea
+        spellCheck="false"
+        value={introduce}
+        onChange={changeIntroduce}
+      ></DesTextArea>
     </DescriptionContainer>
   );
 };
@@ -153,7 +178,7 @@ const Id = memo(() => {
   return (
     <NameContainer>
       <Label>아이디</Label>
-      <InputName type="text" value={id} onChange={() => {}} />
+      <InputName type="text" value={id} onChange={() => {}} readOnly />
     </NameContainer>
   );
 });
@@ -211,7 +236,7 @@ const Email = () => {
   return (
     <NameContainer>
       <Label>이메일</Label>
-      <InputName type="email" value={email} onChange={changeEmail} />
+      <InputName type="email" value={email} onChange={changeEmail} readOnly />
     </NameContainer>
   );
 };
