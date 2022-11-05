@@ -71,7 +71,7 @@ const FriendContainer = memo(({ item, children }: FriendItemProps) => {
 const Friend = ({ item, children }: FriendItemProps) => {
   return (
     <Friend.FriendContainer item={item}>
-      <Image src="" alt="" />
+      <Image />
       <ItemContainer>
         <Name>{item.name}</Name>
         <Tags className="tags">

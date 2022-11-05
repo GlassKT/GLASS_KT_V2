@@ -40,6 +40,7 @@ const App = () => {
             <Route path="/profile" element={<Profile />}></Route>
             <Route path="/friends" element={<Friends />}></Route>
             <Route path="/recommend" element={<Recommend />}></Route>
+
             <Route path="*" element={<div>error page</div>}></Route>
             <Route path="/home" element={<Home />}></Route>
           </>

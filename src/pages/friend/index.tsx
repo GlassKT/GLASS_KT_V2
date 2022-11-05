@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import Left from "../../components/common/left";
 import Navigator from "../../components/common/navigator";
 import Friend from "../../components/friends";
+
 import FriendsApi from "../../core/api/friends/Friends.api";
 import {
   FriendsContainer,
