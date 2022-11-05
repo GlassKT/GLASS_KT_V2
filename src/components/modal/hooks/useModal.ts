@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import UserApi from "../../../core/api/user/User.api";
 
-const useModal = () => {
+const useModal = (refetch) => {
   const [name, setName] = useState("");
   const [hobbyInput, setHobbyInput] = useState("");
   const [hobby, setHobby] = useState([]);
@@ -21,7 +21,7 @@ const useModal = () => {
     const res = await UserApi.getUser();
     console.log(res);
     setName(res.name);
-    setHobby([...res.hobby]);
+    setHobby([...res.Hobbys]);
     setArea(res.area);
     setId(res.id);
     setMbti(res.mbti);
@@ -82,6 +82,7 @@ const useModal = () => {
       introduce,
       birthday: date,
     });
+    refetch();
   };
 
   return {

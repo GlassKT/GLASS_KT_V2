@@ -19,6 +19,7 @@ import {
 import test from "../../assets/images/test.png";
 
 interface ModalProps {
+  refetch?: any;
   children: React.ReactNode;
 }
 
@@ -68,7 +69,7 @@ const ModalContext = createContext<ModalContextType>({
   changeBirthday: null,
 });
 
-const Modal = ({ children }: ModalProps) => {
+const Modal = ({ refetch, children }: ModalProps) => {
   const {
     name,
     hobby,
@@ -90,7 +91,7 @@ const Modal = ({ children }: ModalProps) => {
     changeIntroduce,
     birthday,
     changeBirthday,
-  } = useModal();
+  } = useModal(refetch);
 
   const value: ModalContextType = useMemo(
     () => ({
@@ -146,6 +147,16 @@ const Modal = ({ children }: ModalProps) => {
   );
 };
 
+/**
+ * ### 이미지 수정
+ * 서버 response -> image url
+ * 서버 request ->  formData
+ *
+ * ### 작동 방식
+ * - image 클릭시 input file click()
+ * - \<input type="file" ref={imageRef} />
+ * - 이미지 변경 시 서버 요청
+ */
 const Images = () => {
   return <Image src={test} />;
 };
@@ -200,8 +211,8 @@ const Hobby = memo(() => {
         </Flex>
       </NameContainer>
       <HobbyItemContainer>
-        {hobby.map((v) => (
-          <HobbyItem>{v}</HobbyItem>
+        {hobby.map((v: any) => (
+          <HobbyItem>#{v?.hobby} </HobbyItem>
         ))}
       </HobbyItemContainer>
     </HobbyContainer>
