@@ -19,6 +19,7 @@ const ChatPage = () => {
       <Navigator />
       <TalkProvider>
         <FriendBar />
+        <div>{/* <Chat */}</div>
       </TalkProvider>
     </ChatContainer>
   );

@@ -79,7 +79,7 @@ const Friend = ({ item, children }: FriendItemProps) => {
           {item.hobby &&
             item.hobby.map((v) => (
               <Tag className="tag" key={v}>
-                {v}
+                #{v}
               </Tag>
             ))}
         </Tags>
