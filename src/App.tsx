@@ -1,8 +1,9 @@
-import React, { lazy, useCallback, useEffect } from "react";
+import React, { lazy, useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ReducerInterface } from "./type/interface/redux/reducer";
 import Home from "./pages/home/index";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 import Login from "./pages/login";
 import MainPage from "./pages/Main";
@@ -31,28 +32,31 @@ const App = () => {
   }, []);
 
   const { login } = useSelector((state: ReducerInterface) => state.userReducer);
+  const [queryClient] = useState(new QueryClient());
 
   return (
     <BrowserRouter>
-      <Routes>
-        {login ? (
-          <>
-            <Route path="/" element={<Home />}></Route>
-            <Route path="/profile" element={<Profile />}></Route>
-            <Route path="/friends" element={<Friends />}></Route>
-            <Route path="/recommend" element={<Recommend />}></Route>
-            <Route path="/chat" element={<ChatPage />}></Route>
-            <Route path="/home" element={<Home />}></Route>
-            <Route path="*" element={<div>error page</div>}></Route>
-          </>
-        ) : (
-          <>
-            <Route path="/" element={<Login />}></Route>
-            <Route path="/register" element={<Register />}></Route>
-            <Route path="*" element={<Login />}></Route>
-          </>
-        )}
-      </Routes>
+      <QueryClientProvider client={queryClient}>
+        <Routes>
+          {login ? (
+            <>
+              <Route path="/" element={<Home />}></Route>
+              <Route path="/profile" element={<Profile />}></Route>
+              <Route path="/friends" element={<Friends />}></Route>
+              <Route path="/recommend" element={<Recommend />}></Route>
+              <Route path="/chat" element={<ChatPage />}></Route>
+              <Route path="/home" element={<Home />}></Route>
+              <Route path="*" element={<div>error page</div>}></Route>
+            </>
+          ) : (
+            <>
+              <Route path="/" element={<Login />}></Route>
+              <Route path="/register" element={<Register />}></Route>
+              <Route path="*" element={<Login />}></Route>
+            </>
+          )}
+        </Routes>
+      </QueryClientProvider>
     </BrowserRouter>
   );
 };

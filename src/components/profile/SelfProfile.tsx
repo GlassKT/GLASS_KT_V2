@@ -14,30 +14,40 @@ import {
   Logout,
 } from "./self.style";
 import test from "../../assets/images/test.png";
+import { useQuery } from "react-query";
+import UserApi from "../../core/api/user/User.api";
 
 const SelfProfile = () => {
+  const { data, refetch } = useQuery("getProfile", UserApi.getUser, {
+    onSuccess: (data) => console.log(data),
+  });
+
   return (
     <SelfContainer>
       <SelftImage src={test} alt="" />
       <InfoContainer>
         <LabelContainer>
           <Label htmlFor="name">이름</Label>
-          <LabelTarget id="name">강성훈</LabelTarget>
+          <LabelTarget id="name">{data?.name}</LabelTarget>
         </LabelContainer>
         <LabelContainer>
           <Label htmlFor="email">이메일</Label>
-          <LabelTarget id="email">GlassKT1234@naver.com</LabelTarget>
+          <LabelTarget id="email">{data?.email}</LabelTarget>
         </LabelContainer>
         <LabelContainer>
           <Label htmlFor="hobby">취미</Label>
-          <LabelTarget id="hobby">#코딩 #쇼핑</LabelTarget>
+          <LabelTarget id="hobby">
+            {data?.Hobbys?.map((v) => (
+              <span>{v.hobby} </span>
+            ))}
+          </LabelTarget>
         </LabelContainer>
       </InfoContainer>
       <ButtonContainer>
         <Logout>로그아웃</Logout>
         <Toggle>
           <Toggle.On>
-            <SelfProfile.Modals />
+            <SelfProfile.Modals refetch={refetch} />
           </Toggle.On>
           <Toggle.Trigger>
             <Modify>수정</Modify>
@@ -48,9 +58,9 @@ const SelfProfile = () => {
   );
 };
 
-const Modals = () => {
+const Modals = ({ refetch }) => {
   return (
-    <Modal>
+    <Modal refetch={refetch}>
       <div style={{ height: "768px", marginLeft: "50px", marginRight: "88px" }}>
         <Modal.Images />
         <Modal.Description />

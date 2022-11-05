@@ -21,6 +21,7 @@ const TitleName = styled.div`
   font-weight: 400;
   font-size: 28px;
   line-height: 48px;
+  color: #000000;
 `;
 
 export { RecommendContainer, Title, TitleName };
