@@ -41,7 +41,7 @@ const LeftNewFrend = styled.div`
   width: 480px;
   height: 31vh;
 
-  margin-top: 20%;
+  margin-top: 33.5%;
   margin-left: 23.8vh;
 
   padding-top: 70px;

@@ -13,11 +13,12 @@ import {
   Modify,
   Logout,
 } from "./self.style";
+import test from "../../assets/images/test.png";
 
 const SelfProfile = () => {
   return (
     <SelfContainer>
-      <SelftImage src="" alt="" />
+      <SelftImage src={test} alt="" />
       <InfoContainer>
         <LabelContainer>
           <Label htmlFor="name">이름</Label>

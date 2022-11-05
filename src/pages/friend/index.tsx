@@ -14,13 +14,20 @@ import {
 } from "./Friends";
 
 const Friends = () => {
-  const [waitFreinds, setWaitFreinds] = useState<any>();
-  const [freinds, setFreinds] = useState<any>();
+  const [waitFreinds, setWaitFreinds] = useState<any>(null);
+  const [freinds, setFreinds] = useState<any>(null);
 
   useEffect(() => {
-    FriendsApi.getWaitFriend(setWaitFreinds);
-    FriendsApi.getFriend(setFreinds);
+    a();
   }, []);
+
+  const a = async () => {
+    const value = await FriendsApi.getWaitFriend(setWaitFreinds);
+    setWaitFreinds(value);
+    const value2 = await FriendsApi.getFriend(setFreinds);
+    console.log(value2);
+    setFreinds(value2);
+  };
 
   return (
     <FriendsContainer>

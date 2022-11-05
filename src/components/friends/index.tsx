@@ -12,6 +12,7 @@ import {
   ButtonContainer,
 } from "./Friend";
 import useFriend from "./hooks/useFriend";
+import test from "../../assets/images/test.png";
 
 interface ButtonProps {
   children: React.ReactNode;
@@ -71,15 +72,16 @@ const FriendContainer = memo(({ item, children }: FriendItemProps) => {
 const Friend = ({ item, children }: FriendItemProps) => {
   return (
     <Friend.FriendContainer item={item}>
-      <Image />
+      <Image src={test} alt="" />
       <ItemContainer>
         <Name>{item.name}</Name>
         <Tags className="tags">
-          {item.hobby.map((v) => (
-            <Tag className="tag" key={v}>
-              {v}
-            </Tag>
-          ))}
+          {item.hobby &&
+            item.hobby.map((v) => (
+              <Tag className="tag" key={v}>
+                {v}
+              </Tag>
+            ))}
         </Tags>
         <ButtonContainer>{children}</ButtonContainer>
       </ItemContainer>
