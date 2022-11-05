@@ -5,6 +5,7 @@ import Back from "../../assets/images/background.png";
 import styled from "styled-components";
 import TalkProvider from "../../components/chat/talk";
 import FriendBar from "../../components/chat/FriendBar";
+import ChatItem from "../../components/chat/chatitem/chatitem";
 
 const ChatContainer = styled.div`
   min-height: 100vh;
@@ -19,6 +20,7 @@ const ChatPage = () => {
       <Navigator />
       <TalkProvider>
         <FriendBar />
+        <ChatItem type="me">테스트 글입니다</ChatItem>
       </TalkProvider>
     </ChatContainer>
   );
