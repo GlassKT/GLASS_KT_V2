@@ -9,20 +9,23 @@ const useLogin = () => {
 
   const dispatch = useDispatch();
 
-  const loginRequest = useCallback((e: React.ChangeEvent<HTMLFormElement>) => {
-    e.preventDefault(); // 새로고침 막기
+  const loginRequest = useCallback(
+    async (e: React.ChangeEvent<HTMLFormElement>) => {
+      e.preventDefault(); // 새로고침 막기
 
-    const value = AuthApi.login({
-      id: idRef.current.value,
-      pw: pwRef.current.value,
-    });
-
-    if (value) {
-      dispatch({
-        type: LOGIN,
+      const value = await AuthApi.login({
+        id: idRef.current.value,
+        pw: pwRef.current.value,
       });
-    }
-  }, []);
+
+      if (value) {
+        dispatch({
+          type: LOGIN,
+        });
+      }
+    },
+    []
+  );
 
   return { idRef, pwRef, loginRequest };
 };

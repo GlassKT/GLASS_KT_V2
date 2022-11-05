@@ -2,7 +2,7 @@ import axios from "axios";
 // import config from "../../config/config.json";
 
 const CustomAxios = axios.create({
-  baseURL: "http://10.80.162.164:8080",
+  baseURL: "http://10.80.161.231:8080",
   headers: {
     Authorization: localStorage.getItem("Authorization") || null,
   },
