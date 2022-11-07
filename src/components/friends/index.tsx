@@ -51,7 +51,7 @@ const FriendContext = createContext<FriendType & FriendFuncType>({
 });
 
 const FriendContainer = memo(({ item, children }: FriendItemProps) => {
-  const func = useFriend(item.id);
+  const func = useFriend(item.id, item.name);
   const value: any = useMemo(
     () => ({
       id: item.id,
