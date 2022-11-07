@@ -7,4 +7,5 @@ export const ChatContainer = styled.div`
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
 
   margin: 0 auto;
+  display: flex;
 `;

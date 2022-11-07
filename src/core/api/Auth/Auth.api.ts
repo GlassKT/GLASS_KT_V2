@@ -11,6 +11,7 @@ class Auth {
       });
       localStorage.setItem("Authorization", response.data.accessToken);
       localStorage.setItem("user", response.data.id);
+      localStorage.setItem("name", response.data.name);
       return true;
     } catch (e) {
       return false;

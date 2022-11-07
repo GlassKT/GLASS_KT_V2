@@ -1,11 +1,9 @@
-import React from "react";
+import React, { createContext, memo, useEffect, useRef, useState } from "react";
 import Left from "../../components/common/left";
 import Navigator from "../../components/common/navigator";
 import Back from "../../assets/images/background.png";
 import styled from "styled-components";
 import TalkProvider from "../../components/chat/talk";
-import FriendBar from "../../components/chat/FriendBar";
-import ChatItem from "../../components/chat/chatitem/chatitem";
 
 const ChatContainer = styled.div`
   min-height: 100vh;
@@ -13,17 +11,14 @@ const ChatContainer = styled.div`
   background: url(${Back});
 `;
 
-const ChatPage = () => {
+const ChatPage = memo(() => {
   return (
     <ChatContainer>
       <Left />
       <Navigator />
-      <TalkProvider>
-        <FriendBar />
-        <ChatItem type="me">테스트 글입니다</ChatItem>
-      </TalkProvider>
+      <TalkProvider />
     </ChatContainer>
   );
-};
+});
 
 export default ChatPage;

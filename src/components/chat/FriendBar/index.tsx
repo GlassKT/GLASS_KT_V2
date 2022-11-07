@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const FriendBarContainer = styled.div`
@@ -49,13 +49,37 @@ const FriendList = styled.div`
 `;
 
 const FriendBar = () => {
+  // 데이터 관리
+  const [memberList, setMemberList] = useState([]);
+
+  const [search, setSearch] = useState(null);
+
+  const [timer, setTimer] = useState<NodeJS.Timeout>(null); // 디바운싱 타이머
+
+  const onChangeInputs = async (event) => {
+    setSearch(event.target.value);
+
+    // 디바운싱 - 마지막 호출만 적용 (put api)
+    if (timer) {
+      clearTimeout(timer);
+    }
+    const newTimer = setTimeout(async () => {
+      try {
+        console.log(event.target.value);
+      } catch (e) {
+        console.error("error", e);
+      }
+    }, 400);
+    setTimer(newTimer);
+  };
+
   return (
     <FriendBarContainer>
       <Me>
         <img src="" alt="" />
         <p>강성훈</p>
       </Me>
-      <SearchBar />
+      <SearchBar onChange={onChangeInputs} />
       <FriendList>
         <Friend info="FALSE" />
         <Friend info="TRUE" />

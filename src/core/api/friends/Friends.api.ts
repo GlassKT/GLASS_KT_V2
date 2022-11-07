@@ -57,6 +57,24 @@ class Friends {
     console.log(data.data);
     return data.data;
   }
+
+  public async addChatRoom(friendid) {
+    const id = localStorage.getItem("user");
+    const { data } = await CustomAxios.post(`/addchatroom`, {
+      id,
+      friendid,
+    });
+    console.log(data);
+    return data;
+  }
+
+  public async addChatMember(roomnum) {
+    const id = localStorage.getItem("user");
+    const { data } = await CustomAxios.post(`/addchatmember`, {
+      id,
+      roomnum,
+    });
+  }
 }
 
 export default new Friends();
