@@ -9,7 +9,7 @@ const NameContainer = styled.div`
   justify-content: space-between;
   margin-bottom: 24px;
 `;
-
+const Button = styled.button``;
 const Label = styled.label`
   font-weight: 500;
   font-size: 18px;
@@ -162,7 +162,7 @@ const DesTextArea = styled.textarea`
   outline: none;
   resize: none;
 `;
-
+const ImageContainer = styled.div``;
 const Failure = styled.div`
   border: none;
   color: white;
@@ -182,12 +182,12 @@ const Failure = styled.div`
   font-size: 18px;
   line-height: 26px;
 `;
-
 export {
   InputName,
   HobbyContainer,
   HobbyAdd,
   HobbyItemContainer,
+  ImageContainer,
   RequestButton,
   ModalContainer,
   Image,
@@ -200,6 +200,7 @@ export {
   Failure,
   DescriptionContainer,
   DesTextArea,
+  Button,
 };
 
 interface Input {

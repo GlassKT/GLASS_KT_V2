@@ -4,7 +4,7 @@ import UserApi from "../../../core/api/user/User.api";
 const useModal = (refetch) => {
   const [name, setName] = useState("");
   const [hobbyInput, setHobbyInput] = useState("");
-  const [hobby, setHobby] = useState([]);
+  const [hobby, setHobby] = useState<any[]>(null);
   const [id, setId] = useState("");
   const [date, setDate] = useState("");
   const [area, setArea] = useState("");
@@ -47,7 +47,14 @@ const useModal = (refetch) => {
   };
 
   const hobbyChange = useCallback(() => {
-    setHobby([...hobby, hobbyInput]);
+    setHobby([
+      ...hobby,
+      {
+        user: localStorage.getItem("user"),
+        hobby: hobbyInput,
+        hobbyCol: hobby.length,
+      },
+    ]);
     setHobbyInput("");
   }, [hobby, hobbyInput]);
 
@@ -72,6 +79,14 @@ const useModal = (refetch) => {
     setBirthday(e.target.value);
   };
 
+  const hobbyrequest = async () => {
+    console.log("Ddd");
+    const res = await UserApi.addhobby({
+      user: localStorage.getItem("user"),
+      hobby: hobby,
+    });
+  };
+
   const request = async () => {
     const res = await UserApi.edituser({
       id: localStorage.getItem("user"),
@@ -91,6 +106,7 @@ const useModal = (refetch) => {
     hobbyInput,
     hobbyChange,
     changeName,
+    hobbyrequest,
     changeHobbyInput,
     request,
     id,

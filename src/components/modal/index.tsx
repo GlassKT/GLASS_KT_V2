@@ -1,4 +1,11 @@
-import React, { createContext, memo, useContext, useMemo } from "react";
+import React, {
+  createContext,
+  memo,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import useModal from "./hooks/useModal";
 import {
   HobbyContainer,
@@ -13,6 +20,7 @@ import {
   Label,
   Flex,
   HobbyItem,
+  ImageContainer,
   DescriptionContainer,
   DesTextArea,
 } from "./Modal";
@@ -31,6 +39,7 @@ interface ModalContextType {
   hobbyChange: () => void;
   changeHobbyInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
   request: () => void;
+  hobbyrequest: () => void;
   id: string;
   changeDate: (e: any) => void;
   date: (string | number | readonly string[]) & string;
@@ -54,6 +63,7 @@ const ModalContext = createContext<ModalContextType>({
   nameChange: null,
   changeHobbyInput: null,
   request: null,
+  hobbyrequest: null,
   id: null,
   changeDate: null,
   date: null,
@@ -90,6 +100,7 @@ const Modal = ({ refetch, children }: ModalProps) => {
     introduce,
     changeIntroduce,
     birthday,
+    hobbyrequest,
     changeBirthday,
   } = useModal(refetch);
 
@@ -98,7 +109,7 @@ const Modal = ({ refetch, children }: ModalProps) => {
       name: name,
       hobby: hobby,
       hobbyInput: hobbyInput,
-      hobbyChange,
+      hobbyChange: hobbyChange,
       nameChange: changeName,
       changeHobbyInput: changeHobbyInput,
       request: request,
@@ -106,6 +117,7 @@ const Modal = ({ refetch, children }: ModalProps) => {
       changeDate,
       date,
       area,
+      hobbyrequest: hobbyrequest,
       changeArea,
       email,
       changeEmail,
@@ -157,10 +169,34 @@ const Modal = ({ refetch, children }: ModalProps) => {
  * - \<input type="file" ref={imageRef} />
  * - 이미지 변경 시 서버 요청
  */
-const Images = () => {
-  return <Image src={test} />;
-};
 
+const Images = () => {
+  const [fileImage, setFileImage] = useState("");
+  const saveFileImage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFileImage(URL.createObjectURL(event.target.files[0]));
+  };
+
+  return (
+    <>
+      <div>
+        <input
+          name="imggeUpload"
+          type="file"
+          accept="image/*"
+          onChange={saveFileImage}
+          id="Imginput"
+          hidden
+        />
+        <Label htmlFor="Imginput">
+          {/*<Image src={test}></Image>*/}
+          <div>{fileImage && <Image alt="sample" src={fileImage} />}</div>
+          <div>{!fileImage && <Image alt="sample" src={test} />}</div>
+        </Label>
+      </div>
+    </>
+  );
+};
+const ImageClick = () => {};
 const Description = () => {
   const { introduce, changeIntroduce } = useContext(ModalContext);
   return (
@@ -197,6 +233,12 @@ const Id = memo(() => {
 const Hobby = memo(() => {
   const { hobbyInput, hobbyChange, changeHobbyInput, hobby } =
     useContext(ModalContext);
+
+  useEffect(() => {
+    console.log("hobby");
+    console.log(hobby);
+  }, [hobby]);
+
   return (
     <HobbyContainer>
       <NameContainer>
@@ -211,8 +253,8 @@ const Hobby = memo(() => {
         </Flex>
       </NameContainer>
       <HobbyItemContainer>
-        {hobby.map((v: any) => (
-          <HobbyItem>#{v?.hobby} </HobbyItem>
+        {hobby?.map((v: any) => (
+          <HobbyItem>#{v.hobby}</HobbyItem>
         ))}
       </HobbyItemContainer>
     </HobbyContainer>
@@ -264,8 +306,11 @@ const MBTI = () => {
 };
 
 const Request = memo(({ children }: ModalProps) => {
-  const { request } = useContext(ModalContext);
-  return <RequestButton onClick={request}>{children}</RequestButton>;
+  const { request, hobbyrequest } = useContext(ModalContext);
+
+  hobbyrequest();
+
+  return <RequestButton onClick={hobbyrequest}>{children}</RequestButton>;
 });
 
 Modal.Name = Name;
