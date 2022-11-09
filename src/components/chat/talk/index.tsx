@@ -67,7 +67,9 @@ const TalkProvider = () => {
 
     socket.emit("joinroom", location.pathname.split("/")[2]);
     socket.on("msg", (data) => {
-      console.log(data);
+      if (typeof data !== "string") {
+        setMessageList((prev) => prev.concat(data));
+      }
     });
   };
 
@@ -81,14 +83,6 @@ const TalkProvider = () => {
   }, []);
 
   useEffect(() => {
-    const now = new Date();
-    socket.emit("msg", {
-      num_room: location.pathname.split("/")[2],
-      content: messageList[messageList.length - 1]?.content,
-      user_id: localStorage.getItem("user"),
-      createat: `${now.getFullYear()}-${now.getMonth()}-${now.getDate()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`,
-      name: localStorage.getItem("name"),
-    });
     scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
   }, [messageList]);
 
@@ -103,7 +97,11 @@ const TalkProvider = () => {
             <ChatItem v={v}>{v.content}</ChatItem>
           ))}
         </ChatMain>
-        <ChatInput changeList={changeList} />
+        <ChatInput
+          socket={socket}
+          changeList={changeList}
+          messageList={messageList}
+        />
       </div>
     </ChatContainer>
   );
