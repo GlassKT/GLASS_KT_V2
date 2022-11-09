@@ -1,3 +1,4 @@
+import axios from "axios";
 import CustomAxios from "../../util/CustomAxios";
 
 class User {
@@ -14,10 +15,21 @@ class User {
     console.log(data);
     return data.data;
   };
-
+  public async imageupload(datas) {
+    console.log("image");
+    console.log("datas :" + datas);
+    for (const keyValue of datas) console.log(keyValue);
+    const { data } = await axios.post(`http://192.168.227.124/upload`, datas);
+    console.log(data);
+    return data;
+  }
   public addhobby = async (datas) => {
     console.log(datas);
-    const { data } = await CustomAxios.post(`/addhobby`, datas);
+    const id = localStorage.getItem("user");
+    const { data } = await CustomAxios.post(`/addhobby?user=${id}`, datas);
+    console.log(data);
+    console.log(data.data);
+
     return data.data;
   };
 }

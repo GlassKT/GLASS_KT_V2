@@ -1,5 +1,8 @@
-import { useCallback, useEffect, useState } from "react";
+import axios from "axios";
+import { useCallback, useEffect, useRef, useState } from "react";
 import UserApi from "../../../core/api/user/User.api";
+import { userState } from "../../../core/reducers/user/UserState";
+import CustomAxios from "../../../core/util/CustomAxios";
 
 const useModal = (refetch) => {
   const [name, setName] = useState("");
@@ -12,6 +15,8 @@ const useModal = (refetch) => {
   const [mbti, setMbti] = useState("");
   const [introduce, setIntroduce] = useState("");
   const [birthday, setBirthday] = useState("");
+  const [fileImage, setFileImage] = useState("");
+  const imageRef = useRef<any>();
 
   useEffect(() => {
     getUser();
@@ -29,7 +34,7 @@ const useModal = (refetch) => {
     setDate(res.birthday);
     setIntroduce(res.introduce);
   };
-
+  const onSumbit = () => {};
   const changeMbti = (e: any) => {
     setMbti(e.target.value);
   };
@@ -37,7 +42,12 @@ const useModal = (refetch) => {
   const changeEmail = (e: any) => {
     setEmail(e.target.value);
   };
-
+  const saveFileImage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFileImage(URL.createObjectURL(event.target.files[0]));
+  };
+  const hobbyDelect = () => {
+    console.log(hobby);
+  };
   const changeArea = (e: any) => {
     setArea(e.target.value);
   };
@@ -50,7 +60,6 @@ const useModal = (refetch) => {
     setHobby([
       ...hobby,
       {
-        user: localStorage.getItem("user"),
         hobby: hobbyInput,
         hobbyCol: hobby.length,
       },
@@ -79,12 +88,21 @@ const useModal = (refetch) => {
     setBirthday(e.target.value);
   };
 
+  const imagereqest = async () => {
+    const formData = new FormData();
+    formData.append(`file`, imageRef.current.files[0]);
+    const res = UserApi.imageupload(formData);
+    console.log(res);
+  };
   const hobbyrequest = async () => {
-    console.log("Ddd");
+    const hobbydata = hobby?.map((v: any) => v?.hobby);
+    console.log(hobbydata);
+
     const res = await UserApi.addhobby({
       user: localStorage.getItem("user"),
-      hobby: hobby,
+      hobby: hobbydata,
     });
+    console.log("succes");
   };
 
   const request = async () => {
@@ -109,19 +127,25 @@ const useModal = (refetch) => {
     hobbyrequest,
     changeHobbyInput,
     request,
+    hobbyDelect,
     id,
     date,
     changeDate,
+    fileImage,
     area,
     changeArea,
     email,
     changeEmail,
     mbti,
+    saveFileImage,
     introduce,
     birthday,
     changeMbti,
     changeIntroduce,
     changeBirthday,
+    imageRef,
+    onSumbit,
+    imagereqest,
   };
 };
 

@@ -21,6 +21,7 @@ const Recommend = () => {
   };
 
   useEffect(() => {
+    console.log("요청보냄");
     getRecommend();
   }, []);
 

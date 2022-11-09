@@ -37,7 +37,6 @@ class Friends {
       console.log(e);
     }
   }
-
   public async getBlockFriend(setBlock: any) {
     const value = await CustomAxios.get(
       `/getblockfriend?user=${localStorage.getItem("user")}`
@@ -54,11 +53,12 @@ class Friends {
 
   public async recommendFriend() {
     const id = localStorage.getItem("user"); //http://10.80.161.228:8080 => 현우껄로 변경
+    console.log("요청 보냄");
     const { data } = await axios.get(
-      `http://10.80.161.228:8080/recommand?user=${id}`
+      `http://192.168.0.18:4080/recommend?user=${id}`
     ); //현우 아이피
-    console.log(data.data);
-    return data.data;
+    console.log(data);
+    return data;
   }
 }
 

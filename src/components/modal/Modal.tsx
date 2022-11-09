@@ -98,7 +98,7 @@ const HobbyItem = styled.div`
   align-items: center;
 `;
 
-const RequestButton = styled.div``;
+const RequestButton = styled.button``;
 
 const Image = styled.img`
   width: 150px;

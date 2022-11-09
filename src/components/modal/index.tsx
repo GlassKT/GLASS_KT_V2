@@ -1,6 +1,7 @@
 import React, {
   createContext,
   memo,
+  useCallback,
   useContext,
   useEffect,
   useMemo,
@@ -35,12 +36,14 @@ interface ModalContextType {
   name: string;
   nameChange: any;
   hobby: string[];
+  saveFileImage: (event: React.ChangeEvent<HTMLInputElement>) => void;
   hobbyInput: string;
   hobbyChange: () => void;
   changeHobbyInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
   request: () => void;
   hobbyrequest: () => void;
   id: string;
+  imagereqest: () => void;
   changeDate: (e: any) => void;
   date: (string | number | readonly string[]) & string;
   area: string;
@@ -53,13 +56,20 @@ interface ModalContextType {
   changeIntroduce: (e: any) => void;
   birthday: any;
   changeBirthday: (e: any) => void;
+  fileImage: any;
+  onSumbit: () => void;
+  hobbyDelect: () => void;
+  imageRef: any;
 }
 
 const ModalContext = createContext<ModalContextType>({
   name: null,
   hobby: [],
+  imageRef: null,
+  saveFileImage: null,
   hobbyChange: null,
   hobbyInput: null,
+  hobbyDelect: null,
   nameChange: null,
   changeHobbyInput: null,
   request: null,
@@ -68,6 +78,8 @@ const ModalContext = createContext<ModalContextType>({
   changeDate: null,
   date: null,
   area: null,
+  imagereqest: null,
+  onSumbit: null,
   changeArea: null,
   email: null,
   changeEmail: null,
@@ -77,6 +89,7 @@ const ModalContext = createContext<ModalContextType>({
   changeIntroduce: null,
   birthday: null,
   changeBirthday: null,
+  fileImage: null,
 });
 
 const Modal = ({ refetch, children }: ModalProps) => {
@@ -87,6 +100,7 @@ const Modal = ({ refetch, children }: ModalProps) => {
     hobbyChange,
     changeName,
     changeHobbyInput,
+    fileImage,
     request,
     id,
     changeDate,
@@ -94,6 +108,7 @@ const Modal = ({ refetch, children }: ModalProps) => {
     area,
     changeArea,
     email,
+    onSumbit,
     changeEmail,
     mbti,
     changeMbti,
@@ -102,11 +117,16 @@ const Modal = ({ refetch, children }: ModalProps) => {
     birthday,
     hobbyrequest,
     changeBirthday,
+    imagereqest,
+    saveFileImage,
+    hobbyDelect,
+    imageRef,
   } = useModal(refetch);
 
   const value: ModalContextType = useMemo(
     () => ({
       name: name,
+      imagereqest: imagereqest,
       hobby: hobby,
       hobbyInput: hobbyInput,
       hobbyChange: hobbyChange,
@@ -114,9 +134,14 @@ const Modal = ({ refetch, children }: ModalProps) => {
       changeHobbyInput: changeHobbyInput,
       request: request,
       id,
+      saveFileImage: saveFileImage,
       changeDate,
       date,
+      imageRef,
+      hobbyDelect: hobbyDelect,
       area,
+      onSumbit: onSumbit,
+      fileImage: fileImage,
       hobbyrequest: hobbyrequest,
       changeArea,
       email,
@@ -136,11 +161,15 @@ const Modal = ({ refetch, children }: ModalProps) => {
       hobbyChange,
       changeHobbyInput,
       request,
+      saveFileImage,
       id,
+      hobbyrequest,
       changeDate,
       date,
       area,
       changeArea,
+      hobbyDelect,
+      imagereqest,
       email,
       changeEmail,
       mbti,
@@ -171,13 +200,10 @@ const Modal = ({ refetch, children }: ModalProps) => {
  */
 
 const Images = () => {
-  const [fileImage, setFileImage] = useState("");
-  const saveFileImage = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFileImage(URL.createObjectURL(event.target.files[0]));
-  };
-
+  const { saveFileImage, onSumbit, fileImage, imageRef } =
+    useContext(ModalContext);
   return (
-    <>
+    <form encType="form-data" onSubmit={onSumbit}>
       <div>
         <input
           name="imggeUpload"
@@ -185,6 +211,7 @@ const Images = () => {
           accept="image/*"
           onChange={saveFileImage}
           id="Imginput"
+          ref={imageRef}
           hidden
         />
         <Label htmlFor="Imginput">
@@ -193,10 +220,10 @@ const Images = () => {
           <div>{!fileImage && <Image alt="sample" src={test} />}</div>
         </Label>
       </div>
-    </>
+    </form>
   );
 };
-const ImageClick = () => {};
+
 const Description = () => {
   const { introduce, changeIntroduce } = useContext(ModalContext);
   return (
@@ -231,14 +258,8 @@ const Id = memo(() => {
 });
 
 const Hobby = memo(() => {
-  const { hobbyInput, hobbyChange, changeHobbyInput, hobby } =
+  const { hobbyInput, hobbyChange, changeHobbyInput, hobby, hobbyDelect } =
     useContext(ModalContext);
-
-  useEffect(() => {
-    console.log("hobby");
-    console.log(hobby);
-  }, [hobby]);
-
   return (
     <HobbyContainer>
       <NameContainer>
@@ -254,7 +275,12 @@ const Hobby = memo(() => {
       </NameContainer>
       <HobbyItemContainer>
         {hobby?.map((v: any) => (
-          <HobbyItem>#{v.hobby}</HobbyItem>
+          <>
+            <Label htmlFor="hobbyItem" onClick={hobbyDelect}></Label>
+            <HobbyItem id="hobbyItem" onClick={hobbyDelect}>
+              #{v?.hobby}
+            </HobbyItem>
+          </>
         ))}
       </HobbyItemContainer>
     </HobbyContainer>
@@ -306,11 +332,17 @@ const MBTI = () => {
 };
 
 const Request = memo(({ children }: ModalProps) => {
-  const { request, hobbyrequest } = useContext(ModalContext);
-
-  hobbyrequest();
-
-  return <RequestButton onClick={hobbyrequest}>{children}</RequestButton>;
+  const { request, hobbyrequest, imagereqest } = useContext(ModalContext);
+  const requests = useCallback(() => {
+    request();
+    hobbyrequest();
+    imagereqest();
+  }, []);
+  return (
+    <RequestButton type="submit" onClick={imagereqest}>
+      {children}
+    </RequestButton>
+  );
 });
 
 Modal.Name = Name;
@@ -323,5 +355,5 @@ Modal.Birth = Birth;
 Modal.Area = Area;
 Modal.Email = Email;
 Modal.MBTI = MBTI;
-
+Modal.ModalContext = ModalContext;
 export default Modal;
