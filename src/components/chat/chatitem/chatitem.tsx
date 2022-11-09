@@ -37,12 +37,18 @@ const ChatImage = styled.img`
   border-radius: 50%;
 `;
 
-const ChatItem = memo(({ type, children }: ChatItemType) => {
+const ChatItem = memo(({ v, children }: any) => {
   // type == "other" ? <img></img> : <div></div>;
   return (
-    <ChatITemContainer type={type}>
-      {type === "other" && <ChatImage src="" />}
-      <Description type={type}>{children}</Description>
+    <ChatITemContainer
+      type={v.name === localStorage.getItem("name") ? "me" : "other"}
+    >
+      {v.name !== localStorage.getItem("name") && <ChatImage src="" />}
+      <Description
+        type={v.name === localStorage.getItem("name") ? "me" : "other"}
+      >
+        {children}
+      </Description>
     </ChatITemContainer>
   );
 });
