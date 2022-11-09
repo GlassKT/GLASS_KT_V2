@@ -9,9 +9,11 @@ class Auth {
         id,
         pw,
       });
+      console.log(response);
       localStorage.setItem("Authorization", response.data.accessToken);
       localStorage.setItem("user", response.data.id);
       localStorage.setItem("name", response.data.name);
+      localStorage.setItem("image", response.data.image);
       return true;
     } catch (e) {
       return false;
