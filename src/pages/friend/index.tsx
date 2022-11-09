@@ -25,9 +25,14 @@ const Friends = () => {
     const value = await FriendsApi.getWaitFriend(setWaitFreinds);
     setWaitFreinds(value);
     const value2 = await FriendsApi.getFriend(setFreinds);
-    console.log(value2);
+    // console.log(value2);
     setFreinds(value2);
   };
+
+  useEffect(() => {
+    console.log("freinds");
+    console.log(freinds);
+  }, [freinds]);
 
   return (
     <FriendsContainer>

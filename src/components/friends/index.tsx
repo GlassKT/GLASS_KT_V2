@@ -51,7 +51,7 @@ const FriendContext = createContext<FriendType & FriendFuncType>({
 });
 
 const FriendContainer = memo(({ item, children }: FriendItemProps) => {
-  const func = useFriend(item.id);
+  const func = useFriend(item.id, item.name);
   const value: any = useMemo(
     () => ({
       id: item.id,
@@ -79,7 +79,7 @@ const Friend = ({ item, children }: FriendItemProps) => {
           {item.hobby &&
             item.hobby.map((v) => (
               <Tag className="tag" key={v}>
-                {v}
+                #{v}
               </Tag>
             ))}
         </Tags>

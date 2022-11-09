@@ -60,6 +60,34 @@ class Friends {
     console.log(data);
     return data;
   }
+
+  public async addChatRoom(friendid) {
+    const id = localStorage.getItem("user");
+    const { data } = await CustomAxios.post(`/addchatroom`, {
+      id,
+      friendid,
+    });
+    console.log(data);
+    return data;
+  }
+
+  public async addChatMember(roomnum) {
+    const id = localStorage.getItem("user");
+    const { data } = await CustomAxios.post(`/addchatmember`, {
+      id,
+      roomnum,
+    });
+
+    console.log(data);
+  }
+
+  public async chattinghisyory(roomnum) {
+    const { data } = await CustomAxios.get(
+      `/chattinghisyory?roomnum=${roomnum}`
+    );
+
+    return data;
+  }
 }
 
 export default new Friends();
