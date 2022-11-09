@@ -90,14 +90,27 @@ const useModal = (refetch) => {
 
   const imagereqest = async () => {
     const formData = new FormData();
-    formData.append(`file`, imageRef.current.files[0]);
-    const res = UserApi.imageupload(formData);
+    // const id = localStorage.getItem("user");
+    formData.append(`image`, imageRef.current.files[0]);
+    const ddd = imageRef.current.files[0];
+    console.log(ddd);
+
+    const res = await axios.post(
+      `http://192.168.227.124:8080/uploadimg`,
+      formData,
+      {
+        headers: {
+          Authorization: localStorage.getItem("Authorization") || null,
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    console.log("res");
     console.log(res);
   };
   const hobbyrequest = async () => {
     const hobbydata = hobby?.map((v: any) => v?.hobby);
     console.log(hobbydata);
-
     const res = await UserApi.addhobby({
       user: localStorage.getItem("user"),
       hobby: hobbydata,
