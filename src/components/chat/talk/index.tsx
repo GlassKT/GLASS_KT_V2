@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router";
 import { io, Socket } from "socket.io-client";
 import styled from "styled-components";
+import FriendsApi from "../../../core/api/friends/Friends.api";
 import ChatInput from "../chatInput/ChatInput";
 import ChatItem from "../chatitem/chatitem";
 import FriendBar from "../FriendBar";
@@ -27,55 +28,51 @@ interface MessageType {
 }
 
 const TalkProvider = () => {
-  const [messageList, setMessageList] = useState<MessageType[]>([
-    { type: "other", description: "selifjslejl" },
-    { type: "other", description: "selifjslejl" },
-    { type: "other", description: "selifjslejl" },
-    { type: "other", description: "selifjslejl" },
-    { type: "other", description: "selifjslejl" },
-    { type: "other", description: "selifjslejl" },
-    { type: "other", description: "selifjslejl" },
-    { type: "other", description: "selifjslejl" },
-    { type: "other", description: "selifjslejl" },
-    { type: "other", description: "selifjslejl" },
-    { type: "other", description: "selifjslejl" },
-    { type: "other", description: "selifjslejl" },
-    { type: "other", description: "selifjslejl" },
-    { type: "other", description: "selifjslejl" },
-    { type: "other", description: "selifjslejl" },
-    { type: "other", description: "selifjslejl" },
-    { type: "other", description: "selifjslejl" },
-    { type: "other", description: "selifjslejl" },
-    { type: "other", description: "selifjslejl" },
-    { type: "other", description: "selifjslejl" },
-    { type: "other", description: "selifjslejl" },
-    { type: "other", description: "selifjslejl" },
-    { type: "other", description: "selifjslejl" },
-    { type: "other", description: "selifjslejl" },
-    { type: "other", description: "selifjslejl" },
-    { type: "other", description: "selifjslejl" },
-  ]);
+  const [messageList, setMessageList] = useState<any[]>([]);
   const changeList = (message: string) => {
-    setMessageList([...messageList, { type: "me", description: message }]);
+    /**
+     * num_room: location.pathname.split("/")[2],
+      content: messageList[messageList.length - 1].description,
+      user_id: localStorage.getItem("user"),
+      createat: `${now.getFullYear()}-${now.getMonth()}-${now.getDate()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`,
+      name: localStorage.getItem("name"),
+     */
+    const now = new Date();
+    setMessageList([
+      ...messageList,
+      {
+        num_room: location.pathname.split("/")[2],
+        content: message,
+        user_id: localStorage.getItem("user"),
+        createat: `${now.getFullYear()}-${now.getMonth()}-${now.getDate()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`,
+        name: localStorage.getItem("name"),
+      },
+    ]);
   };
 
   // const { me } = useSelector((state: any) => state.chatReducer);
 
   const location = useLocation();
-  let socket: Socket = io("http://10.80.162.255:7070", {
+  let socket: Socket = io("http://192.168.227.124:7070", {
     path: "/socket.io",
     transports: ["websocket"],
   });
 
+  const getChatHistory = async () => {
+    const res = await FriendsApi.chattinghisyory(
+      location.pathname.split("/")[2]
+    );
+    console.log(res.data);
+    setMessageList(res.data);
+
+    socket.emit("joinroom", location.pathname.split("/")[2]);
+    socket.on("msg", (data) => {
+      console.log(data);
+    });
+  };
+
   useEffect(() => {
-    try {
-      socket.emit("joinroom", location.pathname.split("/")[2]);
-      socket.on("msg", (data) => {
-        console.log(data);
-      });
-    } catch (e) {
-      console.log(e);
-    }
+    getChatHistory();
     return () => {
       if (socket) {
         socket.disconnect();
@@ -87,7 +84,7 @@ const TalkProvider = () => {
     const now = new Date();
     socket.emit("msg", {
       num_room: location.pathname.split("/")[2],
-      content: messageList[messageList.length - 1].description,
+      content: messageList[messageList.length - 1]?.content,
       user_id: localStorage.getItem("user"),
       createat: `${now.getFullYear()}-${now.getMonth()}-${now.getDate()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`,
       name: localStorage.getItem("name"),
@@ -102,8 +99,8 @@ const TalkProvider = () => {
       <FriendBar />
       <div>
         <ChatMain id="main" ref={scrollRef}>
-          {messageList.map((v) => (
-            <ChatItem type={v.type}>{v.description}</ChatItem>
+          {messageList?.map((v) => (
+            <ChatItem v={v}>{v.content}</ChatItem>
           ))}
         </ChatMain>
         <ChatInput changeList={changeList} />

@@ -74,6 +74,16 @@ class Friends {
       id,
       roomnum,
     });
+
+    console.log(data);
+  }
+
+  public async chattinghisyory(roomnum) {
+    const { data } = await CustomAxios.get(
+      `/chattinghisyory?roomnum=${roomnum}`
+    );
+
+    return data;
   }
 }
 
