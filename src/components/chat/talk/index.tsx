@@ -53,7 +53,7 @@ const TalkProvider = () => {
   // const { me } = useSelector((state: any) => state.chatReducer);
 
   const location = useLocation();
-  let socket: Socket = io("http://192.168.227.124:7070", {
+  let socket: Socket = io("http://192.168.0.24:7070", {
     path: "/socket.io",
     transports: ["websocket"],
   });
@@ -63,7 +63,7 @@ const TalkProvider = () => {
       location.pathname.split("/")[2]
     );
     console.log(res.data);
-    setMessageList(res.data);
+    setMessageList(res.data.reverse());
 
     socket.emit("joinroom", location.pathname.split("/")[2]);
     socket.on("msg", (data) => {
@@ -80,7 +80,7 @@ const TalkProvider = () => {
         socket.disconnect();
       }
     };
-  }, []);
+  }, [location]);
 
   useEffect(() => {
     scrollRef.current.scrollTop = scrollRef.current.scrollHeight;

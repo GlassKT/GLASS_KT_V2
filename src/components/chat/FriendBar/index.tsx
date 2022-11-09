@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
+import FriendsApi from "../../../core/api/friends/Friends.api";
 
 const FriendBarContainer = styled.div`
   width: 300px;
@@ -12,6 +15,7 @@ const Me = styled.div`
   img {
     width: 88px;
     height: 88px;
+    border-radius: 50%;
   }
   width: 88px;
   height: 191px;
@@ -50,7 +54,16 @@ const FriendList = styled.div`
 
 const FriendBar = () => {
   // 데이터 관리
-  const [memberList, setMemberList] = useState([]);
+  const [memberList, setMemberList] = useState(null);
+
+  useEffect(() => {
+    getMember();
+  }, []);
+
+  const getMember = async () => {
+    const res = await FriendsApi.getChatMember(localStorage.getItem("user"));
+    setMemberList(res.data);
+  };
 
   const [search, setSearch] = useState(null);
 
@@ -76,30 +89,44 @@ const FriendBar = () => {
   return (
     <FriendBarContainer>
       <Me>
-        <img src="" alt="" />
+        <img
+          src={`http://192.168.0.24:8080/image/${localStorage.getItem(
+            "image"
+          )}`}
+          alt=""
+        />
         <p>강성훈</p>
       </Me>
       <SearchBar onChange={onChangeInputs} />
       <FriendList>
-        <Friend info="FALSE" />
-        <Friend info="TRUE" />
-        <Friend info="FALSE" />
-        <Friend info="FALSE" />
-        <Friend info="FALSE" />
+        {memberList?.map((v) => (
+          <Friend info={v} />
+        ))}
       </FriendList>
     </FriendBarContainer>
   );
 };
 
 const Friend = ({ info }: any) => {
+  const location = useLocation();
+
   return (
-    <FriendContainer type={info}>
-      <img src="" alt="" />
-      <div className="margin24">
-        <div className="name">박성한</div>
-        <div className="des">아 그렇구나</div>
-      </div>
-    </FriendContainer>
+    <Link to={`/chat/${info.roomnum}`}>
+      <FriendContainer
+        type={
+          info.roomnum === location.pathname.split("/")[2] ? "TRUE" : "FALSE"
+        }
+      >
+        <img
+          src={`http://192.168.0.24:8080/image/${info.image}`}
+          alt="이미징"
+        />
+        <div className="margin24">
+          <div className="name">{info.name}</div>
+          <div className="des">{info.message}</div>
+        </div>
+      </FriendContainer>
+    </Link>
   );
 };
 
@@ -120,6 +147,8 @@ const FriendContainer = styled.div<FriendInfo>`
     width: 50px;
     height: 50px;
     margin-left: 40px;
+
+    border-radius: 50%;
   }
 
   .margin24 {

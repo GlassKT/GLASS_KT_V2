@@ -88,6 +88,12 @@ class Friends {
 
     return data;
   }
+
+  public async getChatMember(id) {
+    const { data } = await CustomAxios.get(`/getmychatting?id=${id}`);
+    console.log(data);
+    return data;
+  }
 }
 
 export default new Friends();
