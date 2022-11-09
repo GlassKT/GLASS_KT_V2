@@ -19,7 +19,7 @@ class User {
     console.log("image");
     console.log("datas :" + datas);
     for (const keyValue of datas) console.log(keyValue);
-    const { data } = await axios.post(`http://192.168.227.124/upload`, datas);
+    const { data } = await axios.post(`http://192.168.0.24/upload`, datas);
     console.log(data);
     return data;
   }

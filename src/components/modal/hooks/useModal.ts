@@ -96,7 +96,7 @@ const useModal = (refetch) => {
     console.log(ddd);
 
     const res = await axios.post(
-      `http://192.168.227.124:8080/uploadimg`,
+      `http://192.168.0.24:8080/uploadimg`,
       formData,
       {
         headers: {
