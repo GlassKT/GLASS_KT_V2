@@ -42,12 +42,22 @@ const ChatInptContainer = styled.form`
   }
 `;
 
-const ChatInput = ({ changeList }) => {
+const ChatInput = ({ socket, changeList, messageList }) => {
   const inputRef = useRef<HTMLInputElement>();
 
   const Submit = (e) => {
     e.preventDefault();
-    changeList(inputRef.current.value);
+    const now = new Date();
+
+    socket.emit("msg", {
+      num_room: location.pathname.split("/")[2],
+      content: inputRef.current.value,
+      user_id: localStorage.getItem("user"),
+      createat: `${now.getFullYear()}-${now.getMonth()}-${now.getDate()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`,
+      name: localStorage.getItem("name"),
+    });
+
+    // changeList(inputRef.current.value);
     inputRef.current.value = "";
   };
   return (
