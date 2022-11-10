@@ -118,7 +118,7 @@ const Friend = ({ info }: any) => {
         }
       >
         <img
-          src={`http://192.168.0.24:8080/image/${info.image}`}
+          src={`http://192.168.0.10:8080/image/${info.image}`}
           alt="이미징"
         />
         <div className="margin24">
