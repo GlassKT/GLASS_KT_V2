@@ -55,7 +55,7 @@ class Friends {
     const id = localStorage.getItem("user"); //http://10.80.161.228:8080 => 현우껄로 변경
     console.log("요청 보냄");
     const { data } = await axios.get(
-      `http://192.168.0.16:4080/recommend?user=${id}`
+      `http://192.168.0.32:4080/recommend?user=${id}`
     ); //현우 아이피
     console.log(data);
     return data;

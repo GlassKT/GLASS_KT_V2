@@ -1,5 +1,6 @@
 import React, { memo } from "react";
 import styled from "styled-components";
+import test from "../../../assets/images/KTjpg.jpg";
 
 interface ChatItemType {
   type: "me" | "other";
@@ -43,7 +44,7 @@ const ChatItem = memo(({ v, children }: any) => {
     <ChatITemContainer
       type={v.name === localStorage.getItem("name") ? "me" : "other"}
     >
-      {v.name !== localStorage.getItem("name") && <ChatImage src="" />}
+      {v.name !== localStorage.getItem("name") && <ChatImage src={test} />}
       <Description
         type={v.name === localStorage.getItem("name") ? "me" : "other"}
       >
