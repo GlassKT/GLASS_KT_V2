@@ -21,7 +21,6 @@ const SelfProfile = () => {
   const { data, refetch } = useQuery("getProfile", UserApi.getUser, {
     onSuccess: (data) => console.log(data),
   });
-
   return (
     <SelfContainer>
       <SelftImage src={test} alt="" />
@@ -38,7 +37,7 @@ const SelfProfile = () => {
           <Label htmlFor="hobby">취미</Label>
           <LabelTarget id="hobby">
             {data?.Hobbys?.map((v) => (
-              <span>{v.hobby} </span>
+              <span>{v.hobby}, </span>
             ))}
           </LabelTarget>
         </LabelContainer>

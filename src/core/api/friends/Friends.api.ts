@@ -1,3 +1,4 @@
+import axios from "axios";
 import CustomAxios from "../../util/CustomAxios";
 
 class Friends {
@@ -36,7 +37,6 @@ class Friends {
       console.log(e);
     }
   }
-
   public async getBlockFriend(setBlock: any) {
     const value = await CustomAxios.get(
       `/getblockfriend?user=${localStorage.getItem("user")}`
@@ -52,10 +52,13 @@ class Friends {
   }
 
   public async recommendFriend() {
-    const id = localStorage.getItem("user");
-    const { data } = await CustomAxios.get(`/recommandfriendfriends?id=${id}`);
-    console.log(data.data);
-    return data.data;
+    const id = localStorage.getItem("user"); //http://10.80.161.228:8080 => 현우껄로 변경
+    console.log("요청 보냄");
+    const { data } = await axios.get(
+      `http://192.168.0.32:4080/recommend?user=${id}`
+    ); //현우 아이피
+    console.log(data);
+    return data;
   }
 
   public async addChatRoom(friendid) {
