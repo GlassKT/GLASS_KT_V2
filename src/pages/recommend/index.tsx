@@ -41,7 +41,7 @@ const Recommend = () => {
               style={{
                 display: "flex",
                 width: "100px",
-                height: "30px",
+                height: "31px",
                 marginTop: "40px",
               }}
             >
