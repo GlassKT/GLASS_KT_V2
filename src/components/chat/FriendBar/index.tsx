@@ -90,12 +90,12 @@ const FriendBar = () => {
     <FriendBarContainer>
       <Me>
         <img
-          src={`http://192.168.0.24:8080/image/${localStorage.getItem(
+          src={`http://192.168.0.10:8080/image/${localStorage.getItem(
             "image"
           )}`}
           alt=""
         />
-        <p>강성훈</p>
+        <p>{localStorage.getItem("name")}</p>
       </Me>
       <SearchBar onChange={onChangeInputs} />
       <FriendList>

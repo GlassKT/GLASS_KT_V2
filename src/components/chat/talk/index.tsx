@@ -27,7 +27,7 @@ interface MessageType {
   description: string;
 }
 
-const TalkProvider = () => {
+const  TalkProvider = () => {
   const [messageList, setMessageList] = useState<any[]>([]);
   const changeList = (message: string) => {
     /**
@@ -53,7 +53,7 @@ const TalkProvider = () => {
   // const { me } = useSelector((state: any) => state.chatReducer);
 
   const location = useLocation();
-  let socket: Socket = io("http://192.168.0.24:7070", {
+  let socket: Socket = io("http://192.168.0.10:7070", {
     path: "/socket.io",
     transports: ["websocket"],
   });
