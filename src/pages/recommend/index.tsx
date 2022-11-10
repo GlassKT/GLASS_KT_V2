@@ -5,6 +5,7 @@ import Friend from "../../components/friends";
 import { Button, ItemContainer2, Tag } from "../../components/friends/Friend";
 import { RecommendContainer, Title, TitleName } from "./Recommend";
 import FriendsApi from "../../core/api/friends/Friends.api";
+import { ItemContainer, Margin42 } from "../friend/Friends";
 
 const Recommend = () => {
   const [recommend, setRecommend] = useState(null);
@@ -26,30 +27,16 @@ const Recommend = () => {
       <Title>
         <TitleName>추천 친구</TitleName>
       </Title>
-      <ItemContainer2>
-        {recommend?.map((v) => (
-          <Friend item={v}>
-            <div style={{ display: "flex", width: "100px", height: "30px" }}>
-              {v.hobbie &&
-                v.hobbie.map((b) => (
-                  <Tag className="tag" key={v}>
-                    #{b}
-                  </Tag>
-                ))}
-            </div>
-            <div
-              style={{
-                display: "flex",
-                width: "100px",
-                height: "31px",
-                marginTop: "40px",
-              }}
-            >
-              <Friend.FriendRecommend />
-            </div>
-          </Friend>
-        ))}
-      </ItemContainer2>
+      <Margin42>
+        <ItemContainer>
+          {recommend &&
+            recommend.map((v) => (
+              <Friend item={v} key={v.id}>
+                <Friend.FriendList />
+              </Friend>
+            ))}
+        </ItemContainer>
+      </Margin42>
     </RecommendContainer>
   );
 };
