@@ -53,7 +53,7 @@ const  TalkProvider = () => {
   // const { me } = useSelector((state: any) => state.chatReducer);
 
   const location = useLocation();
-  let socket: Socket = io("http://192.168.0.10:7070", {
+  let socket: Socket = io("http://192.168.0.44:7070", {
     path: "/socket.io",
     transports: ["websocket"],
   });

@@ -1,3 +1,3 @@
 export const config = {
-  ipconfig: "http://10.80.161.231:8080",
+  ipconfig: "http://192.168.0.44:8080",
 };

@@ -90,7 +90,7 @@ const FriendBar = () => {
     <FriendBarContainer>
       <Me>
         <img
-          src={`http://192.168.0.10:8080/image/${localStorage.getItem(
+          src={`http://192.168.0.44:8080/image/${localStorage.getItem(
             "image"
           )}`}
           alt=""
@@ -118,7 +118,7 @@ const Friend = ({ info }: any) => {
         }
       >
         <img
-          src={`http://192.168.0.10:8080/image/${info.image}`}
+          src={`http://192.168.0.44:8080/image/${info.image}`}
           alt="이미징"
         />
         <div className="margin24">
